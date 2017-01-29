@@ -1,0 +1,14 @@
+Appendixie
+Elements
+	Exits and Doors
+		: All movement in this Evennia dungeon is conducted via exit objects.
+		: So, probably all the random rolls will occur within exit objects.
+		: So the game will be based around a custom exit typeclass.
+		:
+		: Perhaps the exit triggers a builder bot that populates new rooms
+		: with random features including of course additional special exits
+		: etc.
+		:
+		: No need a new object type - that looks like an exit or a room but
+		: triggers the correct 
+	Objects
