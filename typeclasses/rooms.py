@@ -19,3 +19,17 @@ class Room(DefaultRoom):
     properties and methods available on all Objects.
     """
     pass
+
+class RandomNode(Room):
+    """
+    A random node is the destination of every "NewExit" it might be a room or a
+    hallway.   
+
+    Question - is a chamber/room a subset of random node?
+    """
+
+    """ 
+    On entry
+    When a player enters a RandomNode - it starts rolling up features
+    from the tables.
+    """

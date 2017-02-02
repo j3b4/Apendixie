@@ -1,4 +1,28 @@
 Appendixie
+TODO
+	New objects
+		new_exit
+			: new_exits are objects that look like exits until traversed, then
+			: they will spawn a random node
+			: new_exits have attributes which dictate constraints on the
+			: random node.
+		random_node
+			: random nodes are created  following the constraints set by the
+			: new_exit that called it.
+			: note: random_nodes will typically have at least one normal exit
+			: (linking back through the new-exit that called it) and zero or
+			: more new new_exits
+			:wq
+			:
+	POC
+		: The simplest proof of concept has to be a random room generating
+		: script DungeonMaster like Griatch suggested - table 1 perhaps?
+		: I don't know. Nothing is easy.
+		:
+		: Perhaps the first step is simply to to a cardinal direction
+		: generator.
+		:
+		: Not really, exits are the first step
 Elements
 	Exits and Doors
 		: All movement in this Evennia dungeon is conducted via exit objects.
@@ -12,3 +36,5 @@ Elements
 		: No need a new object type - that looks like an exit or a room but
 		: triggers the correct 
 	Objects
+		: hmm
+		:
