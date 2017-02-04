@@ -3,7 +3,7 @@
 # table 1
 
 TABLES = [
-    ("I", "Periodic Check", [
+    ["I", "Periodic Check", [
         # Periodic Check
         # (min, max, "result_name", "description")
         (1, 2, "Continue Straight",
@@ -29,14 +29,14 @@ TABLES = [
         (20, 20, "Wandering Monster",
             """-- check again immeditately to see what lies ahead
             so direction of monster's approach can be determined."""),
-        ]),
-    ("II.a", "Location of Door", [
+        ]],
+    ["II.a", "Location of Door", [
         # Doors location relative to passage
         (1, 6, "Left", "<door is on left side of passage>"),
         (7, 12, "Right", "<door is on right side of passage>"),
         (13, 20, "Ahead", "<passage comed to and end at this door>"),
-        ]),
-    ("II.b", "Space Beyond Door is:", [
+        ]],
+    ["II.b", "Space Beyond Door is:", [
         # space beyond door
         (1, 4, "Parallel passage**",
             """or 10' x 10' room if door is straight ahead.
@@ -53,5 +53,5 @@ TABLES = [
             other."""),
         (11, 18, "Room", "(Go to Table V.room)"),
         (19, 20, "Chamber", "(Go to Table V.chamber)"),
-        ])
+        ]]
     ]
