@@ -1,5 +1,8 @@
 Appendixie
 TODO
+	[_] Die roller
+	[_] Tables
+Elements
 	New objects
 		new_exit
 			: new_exits are objects that look like exits until traversed, then
@@ -23,7 +26,6 @@ TODO
 		: generator.
 		:
 		: Not really, exits are the first step
-Elements
 	Exits and Doors
 		: All movement in this Evennia dungeon is conducted via exit objects.
 		: So, probably all the random rolls will occur within exit objects.

@@ -15,6 +15,10 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 """
 
 from evennia import default_cmds
+from evennia.contrib.dice import CmdDice
+from typeclasses.doors import CmdOpen, CmdOpenCloseDoor
+from tables import CmdTable
+
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
     """
@@ -32,6 +36,9 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
+        self.add(CmdOpen())
+        self.add(CmdOpenCloseDoor())
+        self.add(CmdTable())
 
 
 class PlayerCmdSet(default_cmds.PlayerCmdSet):
@@ -51,6 +58,8 @@ class PlayerCmdSet(default_cmds.PlayerCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
+        # add the die roller
+        self.add(CmdDice())
 
 
 class UnloggedinCmdSet(default_cmds.UnloggedinCmdSet):
