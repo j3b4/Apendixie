@@ -2,6 +2,10 @@
 # lets get one working
 # table 1
 
+# TODO: Note, that the die size collumns are arbitrary, so there is a risk of
+# mismatch with the actual length of the table list. Fixing this would require
+# a small patch to commands.tables.CmdTable
+
 TABLES = [  # APPENDIX_A
     ["num.", "Table Name", ],
     ["I.", "PERIODIC CHECK", 20, [
@@ -37,13 +41,11 @@ TABLES = [  # APPENDIX_A
             so direction of monster's approach can be determined."""),
         ]],
     ["II.a", "LOCATION OF DOOR", 20, [
-        # Doors location relative to passage
         (1, 6, "Left", "<door is on left side of passage>"),
         (7, 12, "Right", "<door is on right side of passage>"),
         (13, 20, "Ahead", "<passage comed to and end at this door>"),
         ]],
     ["II.b", "SPACE BEYOND DOOR", 20, [
-        # space beyond door
         (1, 4, "Parallel passage**",
             """or 10' x 10' room if door is straight ahead."""),
         (5, 8, "Passage straight ahead"),
@@ -98,7 +100,7 @@ TABLES = [  # APPENDIX_A
         (13, 15, "10' stream**",
             """ Streams bisect the passage. They will be bridged 75%(1-15) of
             the time and be an obstacle 25% (16-20) of the time."""),
-        ]]
+        ]],
     ["IV.", "TURNS", 20, [
         (1, 8, "left 90 degrees"),
         (9, 9, "left 45 degrees ahead"),
@@ -106,8 +108,19 @@ TABLES = [  # APPENDIX_A
         (11, 18, "right 90 degrees"),
         (19, 19, "right 45 degrees ahead"),
         (20, 20, "right 45 degrees behind", "(right 135 degrees)"),
-        ]]
+        ]],
     ["V.chamber", "CHAMBERS", 20, [
         # table contents
+        (1, 2, "Square, 20' x 20'"),
+        (3, 4, "Square, 20' x 20'"),
+        (5, 6, "Square, 30' x 30'"),
+        (7, 8, "Square, 40' x 40'"),
+        (9, 10, "Rectangular, 20' x 30'"),
+        (11, 13, "Rectangular, 20' x 30'"),
+        (14, 15, "Rectangular, 30' x 50'"),
+        (16, 17, "Rectangular, 40' x 60'"),
+        (18, 20, "Unusual shape and size",
+            """
+            See subtables: V.A and V.B"""),
     ]]
 ]  # END OF THE TABLE OF TABLES AKA APPENDIC A

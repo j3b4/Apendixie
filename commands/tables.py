@@ -77,19 +77,20 @@ class CmdTable(BaseCommand):
             # caller.msg(tableset)
             return
 
-        caller.msg("You roll a d20 and check Table %s" % tab_name)
+        die_size = tableset[tab_no][2]  # 3rd collumn has dice type number
+        caller.msg("You roll a d%s and check Table %s" % (die_size, tab_name))
 
         if overide:
             roll = int(overide)
         else:
-            roll = randint(1, 20)
+            roll = randint(1, die_size)
 
         caller.msg("You rolled a %s\n-----------------\n" % roll)
         name = ""
         desc = ""
 
         # look up roll on the table
-        for n in tableset[tab_no][2]:
+        for n in tableset[tab_no][3]:
             if n[0] <= roll and n[1] >= roll:
                 name = n[2]
                 if len(n) == 4:
