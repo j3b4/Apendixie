@@ -14,13 +14,22 @@ from random import randint
 
 class CmdTable(BaseCommand):
     """
-    Roll a d20 and compare results to a table
+    Roll a d20 and compare results to a table. Tables are identified by their
+    roman numeral heading in Appendix A.
 
     Usage:
-        table <I>
+        table [Numeral] [ = overide]
 
-    This command returns the virtual die result and the descripttion. It then
-    prompts the builder to place the determined room or exit.
+    This command returns the virtual die result and the descripttion.
+
+    Examples:
+        table           ----> prints a list of tables
+        table II.a      ----> rolls a d20 on table II.a
+        table II.a = 20 -----> overides the dices and chooses the result for 20
+
+    Alias:
+        tr
+
     """
     key = "table"
     aliases = ["tr"]
