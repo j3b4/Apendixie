@@ -4,11 +4,11 @@
 
 TABLES = [  # APPENDIX_A
     ["num.", "Table Name", ],
-    ["I.", "PERIODIC CHECK", [
-        (1, 2, "Continue Straight", """ 
+    ["I.", "PERIODIC CHECK", 20, [
+        (1, 2, "Continue Straight", """
          -- check again in 60' (this table)"""),
         (3, 5, "Door",
-            """ 
+            """
             (see Table II.) <roll on Table II.a first, then II.b>"""),
         (6, 10, "Side Passage",
             """
@@ -36,13 +36,13 @@ TABLES = [  # APPENDIX_A
             -- check again immeditately to see what lies ahead
             so direction of monster's approach can be determined."""),
         ]],
-    ["II.a", "LOCATION OF DOOR", [
+    ["II.a", "LOCATION OF DOOR", 20, [
         # Doors location relative to passage
         (1, 6, "Left", "<door is on left side of passage>"),
         (7, 12, "Right", "<door is on right side of passage>"),
         (13, 20, "Ahead", "<passage comed to and end at this door>"),
         ]],
-    ["II.b", "SPACE BEYOND DOOR", [
+    ["II.b", "SPACE BEYOND DOOR", 20, [
         # space beyond door
         (1, 4, "Parallel passage**",
             """or 10' x 10' room if door is straight ahead."""),
@@ -60,7 +60,7 @@ TABLES = [  # APPENDIX_A
         (11, 18, "Room", "(Go to Table V.room)"),
         (19, 20, "Chamber", "(Go to Table V.chamber)"),
         ]],
-    ["III.", "SIDE PASSAGES", [
+    ["III.", "SIDE PASSAGES", 20, [
         (1, 2, "left 90 degrees"),
         (3, 4, "right 90 degrees"),
         (5, 5, "left 45 degrees ahead"),
@@ -77,14 +77,14 @@ TABLES = [  # APPENDIX_A
             if present passage is horizontal or vertical it forms a fifth
             passage into the 'X'."""),
         ]],
-    ["III.A", "PASSAGE WIDTH", [
+    ["III.A", "PASSAGE WIDTH", 20, [
         (1, 12, "10'"),
         (13, 16, "20'"),
         (17, 17, "30'"),
         (18, 18, "5'"),
         (19, 20, "SPECIAL PASSAGE", "TABLE III.B"),
         ]],
-    ["III.B", "SPECIAL PASSAGE", [
+    ["III.B", "SPECIAL PASSAGE", 20, [
         (1, 4, "40', columns down center"),
         (5, 7, "40', double row of columns"),
         (8, 10, "50', double row of columns"),
@@ -99,4 +99,15 @@ TABLES = [  # APPENDIX_A
             """ Streams bisect the passage. They will be bridged 75%(1-15) of
             the time and be an obstacle 25% (16-20) of the time."""),
         ]]
+    ["IV.", "TURNS", 20, [
+        (1, 8, "left 90 degrees"),
+        (9, 9, "left 45 degrees ahead"),
+        (10, 10, "left 45 degrees behind", "(left 135 degrees)"),
+        (11, 18, "right 90 degrees"),
+        (19, 19, "right 45 degrees ahead"),
+        (20, 20, "right 45 degrees behind", "(right 135 degrees)"),
+        ]]
+    ["V.chamber", "CHAMBERS", 20, [
+        # table contents
+    ]]
 ]  # END OF THE TABLE OF TABLES AKA APPENDIC A
