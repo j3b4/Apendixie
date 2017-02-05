@@ -2,8 +2,10 @@
 Tables
 these commands allow players to interact with the appendix directly.
 """
-from commands.command import Command as BaseCommand
+#   evennia.commands.default.muxcommand.MuxCommand.
+from evennia.commands.default.muxcommand import MuxCommand as BaseCommand
 # from world.tables import TABLE_I
+# from evennia import Command as BaseCommand
 from world.tables import TABLES as tableset
 from random import randint
 # import re
@@ -39,8 +41,9 @@ class CmdTable(BaseCommand):
             caller.msg(menu)
             return
 
-        tab_name = self.args
+        tab_name = self.lhs
         tab_name = tab_name.strip()
+        overide = self.rhs
         # print "tab_name = %s" % tab_name
 
         tab_no = 0  # index of the target table
@@ -67,7 +70,10 @@ class CmdTable(BaseCommand):
 
         caller.msg("You roll a d20 and check Table %s" % tab_name)
 
-        roll = randint(1, 20)
+        if overide:
+            roll = int(overide)
+        else:
+            roll = randint(1, 20)
 
         caller.msg("You rolled a %s\n-----------------\n" % roll)
         name = ""
@@ -77,7 +83,8 @@ class CmdTable(BaseCommand):
         for n in tableset[tab_no][2]:
             if n[0] <= roll and n[1] >= roll:
                 name = n[2]
-                desc = n[3]
+                if len(n) == 4:
+                    desc = n[3]
                 break
         result = ("%s: %s" % (name, desc))
         caller.msg(result)
