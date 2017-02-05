@@ -109,8 +109,7 @@ TABLES = [  # APPENDIX_A
         (19, 19, "right 45 degrees ahead"),
         (20, 20, "right 45 degrees behind", "(right 135 degrees)"),
         ]],
-    ["V.chamber", "CHAMBERS", 20, [
-        # table contents
+    ["V.ch", "CHAMBERS", 20, [
         (1, 2, "Square, 20' x 20'"),
         (3, 4, "Square, 20' x 20'"),
         (5, 6, "Square, 30' x 30'"),
@@ -122,5 +121,78 @@ TABLES = [  # APPENDIX_A
         (18, 20, "Unusual shape and size",
             """
             See subtables: V.A and V.B"""),
-    ]]
+    ]],
+    ["V.ro", "ROOM", 20, [
+        (1, 2, "Square, 10' x 10'"),
+        (3, 4, "Square, 20' x 20'"),
+        (5, 6, "Square, 30' x 30'"),
+        (7, 8, "Square, 40' x 40'"),
+        (9, 10, "Rectangular, 10' x 20'"),
+        (11, 13, "Rectangular, 20' x 30'"),
+        (14, 15, "Rectangular, 20' x 40'"),
+        (16, 17, "Rectangular, 30' x 40'"),
+        (18, 20, "Unusual shape and size",
+            """
+            See subtables: V.A and V.B"""),
+    ]],
+    ["V.A", "UNUSUAL SHAPE", 20, [
+        (1, 5, "Circular*",
+            """
+            * 1-5 has pool (See Table VIII.A and  VIII.C if appropriate),
+            6-7 has well, 8-10 has shaft, and 11-20 is normal."""),
+        (6, 8, "Triangular"),
+        (9, 11, "Trapezoidal"),
+        (12, 13, "Odd-Shaped**",
+            """
+            ** Draw what shape you desire or what will fit the map -- it is a
+            special shape if desired. <<Describe the shape>>"""),
+        (14, 15, "Oval"),
+        (16, 17, "Hexagonal"),
+        (18, 19, "Octagonal"),
+        (20, 20, "Cave")
+    ]],
+    ["V.B", "UNUSUAL SIZE", 20, [
+        (1, 3, "about 500 sq. ft."),
+        (4, 6, "about 900 sq. ft."),
+        (7, 8, "about 1,300 sq. ft."),
+        (9, 10, "about 2,000 sq. ft."),
+        (11, 12, "about 2,700 sq. ft."),
+        (13, 14, "about 3,400 sq. ft."),
+        (15, 20, "Roll again",
+            """
+            add the result to <2,000 sq. ft.> (if this generates another 15-20
+            repeat the process, <adding another 2,000 sq. ft.>, and so on)"""),
+    ]],
+    ["V.C", "NUMBER <<and type>> OF EXITS", 20, [
+        # Appendix A, TABLE V.C too tedious. This is a simplified version.
+        (1, 4, "1 Door"),
+        (5, 8, "1 Passage"),
+        (9, 11, "2 Doors"),
+        (11, 13, "1 Door, 1 Passage"),
+        (14, 16, "2 Doors, 1 Passage"),
+        (17, 18, "3 Doors"),
+        (19, 19, "3 Doors, 1 Passage"),
+        (20, 20, "0 Doors",
+            """
+            Check once per 10' for secret doors (see TABLE V.D., footnote)
+            <<actually that wont help. So try this instead: Roll again on
+            this chart and interpret any "Passage" result as a secret
+            door. You're welcome."""),
+        ]],
+    ["V.D", "EXIT LOCATION", 20, [
+        (1, 7, "opposite wall"),
+        (8, 12, "left wall"),
+        (13, 17, "right wall"),
+        (18, 20, "same wall")
+    ]],
+    ["V.E.", "EXIT DIRECTION <<for passages only>>", 10, [
+        # sneaking a d10 in here for lulz
+        (1, 8, "straight ahead"),
+        (9, 9, "45 degrees left/right*",
+            """* The exit will be appropriate to existing circumstances, but
+            use the direction before the slash in preference to the other."""),
+        (10, 10, "45 degrees right/left*",
+            """* The exit will be appropriate to existing circumstances, but
+            use the direction before the slash in preference to the other."""),
+    ]],
 ]  # END OF THE TABLE OF TABLES AKA APPENDIC A
