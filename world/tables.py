@@ -3,6 +3,7 @@
 # table 1
 
 TABLES = [
+    ["no. ", "Table Name", ["table contents"]],
     ["I", "Periodic Check", [
         # Periodic Check
         # (min, max, "result_name", "description")
@@ -36,7 +37,7 @@ TABLES = [
         (7, 12, "Right", "<door is on right side of passage>"),
         (13, 20, "Ahead", "<passage comed to and end at this door>"),
         ]],
-    ["II.b", "Space Beyond Door is:", [
+    ["II.b", "Space Beyond Door", [
         # space beyond door
         (1, 4, "Parallel passage**",
             """or 10' x 10' room if door is straight ahead.
@@ -54,4 +55,4 @@ TABLES = [
         (11, 18, "Room", "(Go to Table V.room)"),
         (19, 20, "Chamber", "(Go to Table V.chamber)"),
         ]]
-    ]
+]
