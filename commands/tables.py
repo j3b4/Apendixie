@@ -4,7 +4,8 @@ these commands allow players to roll dice on a virtual replica of the Appendix
 A tables from the AD&D DMG.
 """
 # from evennia import Command as BaseCommand
-from evennia.commands.default.muxcommand import MuxCommand as MuxCommand
+from commands.command import MuxCommand
+# from evennia.commands.default.muxcommand import MuxCommand as MuxCommand
 from world.tables import TABLES as tableset
 from random import randint
 
