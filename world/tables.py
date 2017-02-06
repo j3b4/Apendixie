@@ -378,4 +378,87 @@ TABLES = [  # APPENDIX_A
             down 1 level (cannot be ascended in any manner)."""),
         # TODO: FINISH THIS
         ]],
-]  # END OF THE TABLE OF TABLES AKA APPENDIC A
+    ["VII.A", "GAS SUB_TABLE", 20, [
+        (1, 7, "Only effect is to obscure vision when passing through."),
+        (8, 9, "Blinds for 1-6 turns after passing through."),
+        (10, 12, "Fear",
+            """
+            Run back 120' feet unless saving throw versus magic is made."""),
+        (13, 13, "Sleep",
+            """
+            Party sound asleep for 2-12 turns (as sleep spell)."""),
+        (14-18, "Strength",
+            """
+            Adds 1-6 points of strength (as strength spell) to all fighters in
+            the party for 1 to 10 hours."""),
+        (19, 19, "Sickness",
+            """
+            Return to surface immediately."""),
+        (20, 20, "Poison",
+            """
+            Killed unless saving throw versus poison is made.""")
+        ]],
+    ["VIII", "CAVES AND CAVERNS", 20, [
+        (1, 5, "Cave about 40' x 60'"),
+        (6, 7, "Cave about 50' x 75'"),
+        (8, 9, "Double cave: 20' x 30', 60' x 60'"),
+        (10, 11, "Double cave: 35' x 50', 80' X 90'"),
+        (12, 14, "Cavern about 95' x 125' *",
+            """
+             * Roll to see if pool therein (see TABLE VIII.A.)."""),
+        (15, 16, "Cavern about 120' x 150'"),
+        (17, 18, "Cavern about 150' x 200' *",
+            """
+             * Roll to see if pool therein (see TABLE VIII.A.)."""),
+        (19, 20, "Mammoth cavern about 250'-300' x 350'-400' **",
+            """
+            ** Roll to see if lake therein (see TABLE VIII.B.).""")
+        ]],
+    ["VIII.A", "POOLS", 10, [
+        (1, 4, "No pool"),
+        (5, 5, "Pool, no monster"),
+        (6, 6, "Pool, monster"),
+        (7, 9, "Pool, monster & treasure"),
+        (10, 10, "Magical Pool *",
+            """
+            See TABLE VIII.C"""),
+        ]],
+    ["VIII.B", "LAKES", 10, [
+        (1, 5, "No lake"),
+        (6, 7, "Lake, no monsters"),
+        (8, 9, "Lake, monsters. *",
+            """
+             * Determine monster and treasure from appropriate encounter
+             matrix"""),
+        (10, 10, "Enchanted Lake **",
+            """
+            ** Enchanted lake leads any who manage to cross it to another
+            dimension, special temple, etc. (if special map is available,
+            otherwise treat as lake with monsters), 90% chance that monster
+            will guard lake.""")
+        ]],
+    ["VIII.C", "MAGIC POOLS", 20, [
+        (1, 8, "<<Transmutation>>",
+            """
+            Turns gold to platinum (1-11) or lead (12-20), one time only."""),
+        (9, 15, "Transfiguation",
+            """
+            Will, on a one-time only basis, add (1-3) or subtract (4-6) from
+            one characteristic of all who stand within it:
+            1 = strength     4 = dexterity
+            2 = intelligence 5 = constitution
+            3 = wisdom       6 = charisma
+            (add or subtract from 1-3 points, checking for each character as to
+            addition or subtraction, characteristic, and amount)."""),
+        (16, 17, "Talking Pool",
+            """
+             Talking pool which will grant 1 wish to characters of its
+             alignment and damage others from 1-20 points. Wish can be withheld
+             for up to 1 day. Pool’s alignment is: lawful good 1-6, lawful evil
+             7-9, chaotic good 10-12, chaotic evil 13-17, neutral 18-20."""),
+        (19, 20, "Transporter pool:",
+            """
+             1-7, back to surface; 8-12, elsewhere on level; 13-16,
+             1 level down; 17-20, 100 miles away for outdoor adventure.""")
+        ]]
+]  # END OF THE TABLE OF TABLES AKA APPENDIX A
