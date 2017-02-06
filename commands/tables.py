@@ -1,15 +1,12 @@
 """
 Tables
-these commands allow players to interact with the appendix directly.
+these commands allow players to roll dice on a virtual replica of the Appendix
+A tables from the AD&D DMG.
 """
-#   evennia.commands.default.muxcommand.MuxCommand.
-from evennia.commands.default.muxcommand import MuxCommand as BaseCommand
-# from world.tables import TABLE_I
 # from evennia import Command as BaseCommand
+from evennia.commands.default.muxcommand import MuxCommand as BaseCommand
 from world.tables import TABLES as tableset
 from random import randint
-# import re
-# from evennia.contrib.dice import roll_dice as roll_dice
 
 
 class CmdTable(BaseCommand):

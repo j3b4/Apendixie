@@ -454,7 +454,7 @@ TABLES = [  # APPENDIX_A
             """
              Talking pool which will grant 1 wish to characters of its
              alignment and damage others from 1-20 points. Wish can be withheld
-             for up to 1 day. Pool’s alignment is: lawful good 1-6, lawful evil
+             for up to 1 day. Pool's alignment is: lawful good 1-6, lawful evil
              7-9, chaotic good 10-12, chaotic evil 13-17, neutral 18-20."""),
         (19, 20, "Transporter pool:",
             """
