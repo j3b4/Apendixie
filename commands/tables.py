@@ -34,7 +34,7 @@ class CmdTable(BaseCommand):
     key = "table"
     aliases = ["tr"]
     help_category = "Table Commands"
-    usage = "table <number or label>"
+    usage = "usage: table [<numeral>] [= <dice result>]"
 
     def func(self):
         caller = self.caller
@@ -42,12 +42,15 @@ class CmdTable(BaseCommand):
         menu = "\n\n"
         if not self.args:
             for i in tableset:
-                # print i
+                '''
                 menu += i[0]
                 menu += ": "
                 menu += i[1]
                 menu += "\n"
+                '''
+                menu += '{:<10}{}\n'.format(i[0], i[1])
             caller.msg(menu)
+            # caller.msg(self.usage)
             return
 
         tab_name = self.lhs

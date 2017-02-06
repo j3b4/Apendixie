@@ -7,8 +7,8 @@
 # require some sort of a check.
 
 TABLES = [  # APPENDIX_A
-    ["num.", "Table Name", ],
-    ["I.", "PERIODIC CHECK", 20, [
+    ["Numeral", "Table Name", ],
+    ["I", "PERIODIC CHECK", 20, [
         (1, 2, "Continue Straight", """
          -- check again in 60' (this table)"""),
         (3, 5, "Door",
@@ -62,7 +62,7 @@ TABLES = [  # APPENDIX_A
         (11, 18, "Room", "(Go to Table V.room)"),
         (19, 20, "Chamber", "(Go to Table V.chamber)"),
         ]],
-    ["III.", "SIDE PASSAGES", 20, [
+    ["III", "SIDE PASSAGES", 20, [
         (1, 2, "left 90 degrees"),
         (3, 4, "right 90 degrees"),
         (5, 5, "left 45 degrees ahead"),
@@ -101,7 +101,7 @@ TABLES = [  # APPENDIX_A
             """ Streams bisect the passage. They will be bridged 75%(1-15) of
             the time and be an obstacle 25% (16-20) of the time."""),
         ]],
-    ["IV.", "TURNS", 20, [
+    ["IV", "TURNS", 20, [
         (1, 8, "left 90 degrees"),
         (9, 9, "left 45 degrees ahead"),
         (10, 10, "left 45 degrees behind", "(left 135 degrees)"),
