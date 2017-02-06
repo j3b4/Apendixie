@@ -3,8 +3,8 @@
 # table 1
 
 # TODO: Note, that the die size collumns are arbitrary, so there is a risk of
-# mismatch with the actual length of the table list. Fixing this would require
-# a small patch to commands.tables.CmdTable
+# mismatch with the actual length of the table list.  Avoiding this would
+# require some sort of a check.
 
 TABLES = [  # APPENDIX_A
     ["num.", "Table Name", ],
@@ -217,7 +217,7 @@ TABLES = [  # APPENDIX_A
         ]],
     ["V.F.i", "Stairs", 20, [
         (1, 5, "Up  1 level."),
-        (6, 6, "<<no comment, just roll again I guess>>")
+        (6, 6, "<<no comment, just roll again I guess>>"),
         (7, 8, "Up 2 levels"),
         (9, 14, "Down 1 level."),
         (15, 19, "Down 2 levels."),
@@ -321,13 +321,16 @@ TABLES = [  # APPENDIX_A
             unless unlocated:  Non-elf locates 3 in 20, elf locates 5 in
             20, magical device locates 18 in 20 (then see TABLE II.). Unlocated
             secret doors = <<Pit 10' deep, 3 in 6 to fall in.>>"""),
-        (6, 7, "Pit 10' deep, 3 in 6 to fall in."),
-        (8, 8, "Pit 10' deep with spikes, 3 in 6 to fall in."),
+        (6, 7, "Pit 10' deep",
+            """
+            3 in 6 to fall in."""),
+        (8, 8, "Pit 10' deep",
+            """
+            with spikes, 3 in 6 to fall in."""),
         (9, 9, "20' x 20' elevator room",
             """
-            (party has entered door directly
-            ahead and is in room), descends 1 level and will not ascend for 30
-            turns."""),
+            (party has entered door directly ahead and is in room), descends
+            1 level and will not ascend for 30 turns."""),
         (10, 10, "20' x 20' elevator room",
             """
             (party has entered door directly ahead and is in room), descends
@@ -347,6 +350,32 @@ TABLES = [  # APPENDIX_A
              followed by flaming cinder (2-12 h.p. damage unless successful
              save vs. magic is made, which indicates only 1-3 h.p.
              damage)."""),
+        (14, 14, "Pit 10' deep, 3 in 6 to fall in.",
+            """
+            Pit walls move together to crush victim(s) in 2-5 rounds."""),
+        (15, 15, "Arrow trap",
+            """
+            1-3 Arrows, 1 in 20 is poisoned."""),
+        (16, 16, "Spear Trap",
+            """
+            1-3 spears, 1 in 20 is poisoned."""),
+        (17, 17, "Gas",
+            """
+            Party has detected it, but must breathe it to continue along
+            corridor, as it covers 60' ahead. Mark map accordingly regardless
+            of turning back or not. (See TABLE VII.A)"""),
+        (18, 18, "Door falls outward",
+            """
+            Causes 1-10 hit points, or stone falls from ceiling causing 2-20
+            hit points of damage to each person failing their saving throw
+            versus petrification."""),
+        (19, 19, "Illusionary wall",
+            """ ... concealing 8. (pit) above 1-6, 20. (chute) below (7-10)
+            or chamber with monster and treasure (11-20)
+            (see TABLE V.)."""),
+        (20, 20, "Chute",
+            """
+            down 1 level (cannot be ascended in any manner)."""),
         # TODO: FINISH THIS
         ]],
 ]  # END OF THE TABLE OF TABLES AKA APPENDIC A
