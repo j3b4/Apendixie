@@ -121,7 +121,7 @@ TABLES = [  # APPENDIX_A
         (18, 20, "Unusual shape and size",
             """
             See subtables: V.A and V.B"""),
-    ]],
+        ]],
     ["V.ro", "ROOM", 20, [
         (1, 2, "Square, 10' x 10'"),
         (3, 4, "Square, 20' x 20'"),
@@ -134,7 +134,7 @@ TABLES = [  # APPENDIX_A
         (18, 20, "Unusual shape and size",
             """
             See subtables: V.A and V.B"""),
-    ]],
+        ]],
     ["V.A", "UNUSUAL SHAPE", 20, [
         (1, 5, "Circular*",
             """
@@ -150,7 +150,7 @@ TABLES = [  # APPENDIX_A
         (16, 17, "Hexagonal"),
         (18, 19, "Octagonal"),
         (20, 20, "Cave")
-    ]],
+        ]],
     ["V.B", "UNUSUAL SIZE", 20, [
         (1, 3, "about 500 sq. ft."),
         (4, 6, "about 900 sq. ft."),
@@ -162,7 +162,7 @@ TABLES = [  # APPENDIX_A
             """
             add the result to <2,000 sq. ft.> (if this generates another 15-20
             repeat the process, <adding another 2,000 sq. ft.>, and so on)"""),
-    ]],
+        ]],
     ["V.C", "NUMBER <<and type>> OF EXITS", 20, [
         # Appendix A, TABLE V.C too tedious. This is a simplified version.
         (1, 4, "1 Door"),
@@ -184,8 +184,8 @@ TABLES = [  # APPENDIX_A
         (8, 12, "left wall"),
         (13, 17, "right wall"),
         (18, 20, "same wall")
-    ]],
-    ["V.E.", "EXIT DIRECTION <<for passages only>>", 10, [
+        ]],
+    ["V.E", "EXIT DIRECTION <<for passages only>>", 10, [
         # sneaking a d10 in here for lulz
         (1, 8, "straight ahead"),
         (9, 9, "45 degrees left/right*",
@@ -194,5 +194,159 @@ TABLES = [  # APPENDIX_A
         (10, 10, "45 degrees right/left*",
             """* The exit will be appropriate to existing circumstances, but
             use the direction before the slash in preference to the other."""),
-    ]],
+        ]],
+    ["V.F", "CHAMBER OR ROOM CONTENTS", 20, [
+        (1, 12, "Empty"),
+        (13, 14, "Monster only",
+            """
+            (determine on appropriate table from APPENDIX C: RANDOM MONSTER
+            ENCOUNTERS, Dungeon Encounter Matrix)."""),
+        (15, 17, "Monster and treasure",
+            """
+            Monster - see APPENDIX C: RANDOM MONSTER ENCOUNTERS, Dungeon
+            Encounter Matrix.
+            Treasure - see TABLE V.G <<Roll twice>>"""),
+        (18, 18, "Special/Stairs",
+            """<< Roll on TABLE V.F.i STAIRS>>"""),
+        (19, 19, "Trick/Trap",
+            """
+            See TABLE VII"""),
+        (20, 20, "Treasure",
+            """
+            (see TABLE V.G)""")
+        ]],
+    ["V.F.i", "Stairs", 20, [
+        (1, 5, "Up  1 level."),
+        (6, 6, "<<no comment, just roll again I guess>>")
+        (7, 8, "Up 2 levels"),
+        (9, 14, "Down 1 level."),
+        (15, 19, "Down 2 levels."),
+        (20, 20, "Down 3 levels",
+            """
+            -- 2 flights of stairs and a slanting passageway.""")
+        ]],
+    ["V.G", "TREASURE*", 100, [
+        (1, 25, "1,000 copper pieces/level"),
+        (26, 50, "1,000 silver pieces/level"),
+        (51, 65, "750 electrum pieces/level"),
+        (66, 80, "250 gold pieces/level"),
+        (81, 90, "100 platiunum pieces/level"),
+        (91, 94, "1-4 gems/level"),
+        (95, 97, "1 piece jewelry/level"),
+        (98, 100, "Magic",
+            """
+            (Roll once on Magic Items Table)""")
+        ]],
+    ["V.H", "TREASURE IS CONTAINED IN", 20, [
+        (1, 2, "Bags"),
+        (3, 4, "Sacks"),
+        (5, 6, "Small Coffers"),
+        (7, 8, "Chests"),
+        (9, 10, "Huge Chests"),
+        (11, 12, "Pottery Jars"),
+        (13, 14, "Metal Urns"),
+        (15, 16, "Stone Containers"),
+        (17, 18, "Iron Trunks"),
+        (19, 20, "Loose")
+        ]],
+    ["V.I", "TREASURE IS GUARDED BY", 20, [
+        (1, 2, "Contact poison on container"),
+        (3, 4, "Contact poison on treasure"),
+        (5, 6, "Poisoned needles in lock"),
+        (7, 7, "Poisoned needles in handles"),
+        (8, 8, "Spring darts firing from front of container"),
+        (9, 9, "Spring darts firing from top of container"),
+        (10, 10, "Spring darts firing from inside bottom of container"),
+        (11, 12, "Blade scything across inside"),
+        (13, 13, "Poisonous insects or reptiles living inside containter"),
+        (14, 14, "Gas released by opening container"),
+        (15, 15, "Trapdoor opening in front of container"),
+        (16, 16, "Trapdoor opening 6' in front of container"),
+        (17, 17, "Stone block dropping in front of container"),
+        (18, 18, "Spears released from walls when container opened"),
+        (19, 19, "Explosive Runes"),
+        (20, 20, "Symbol")
+        ]],
+    ["V.J", "TREASURE IS HIDDEN BY/IN", 20, [
+        (1, 3, "Invisibilty"),
+        (4, 5, "Illusion (to change of hide appearance)"),
+        (6, 6, "Secret space under container"),
+        (7, 8, "Secret compartment in container"),
+        (9, 9, "Inside ordinary item in plain view"),
+        (10, 10, "Disguised to appear as something else"),
+        (11, 11, "Under a heap of trash/dung"),
+        (12, 13, "Under a loose stone in the floor"),
+        (14, 15, "Behind a loose stone in the wall"),
+        (16, 20, "In a secret room nearby")
+        ]],
+    ["VI", "STAIRS", 20, [
+        (1, 5, "Down 1 level*",
+            """
+            * 1 in 20 has a door which closes egress for the day."""),
+        (6, 6, "Down 2 levels**",
+            """
+            ** 2 in 20 has a door which closes egress for the day."""),
+        (7, 7, "Down 3 levels***",
+            """
+            *** 3 in  20 has a door which closes egress for the day."""),
+        (8, 8, "Up 1 level"),
+        (9, 9, "Up dead end",
+            """
+            (1 in 6 chance to chute down 2 levels)"""),
+        (10, 10, "Down dead end",
+            """
+            (1 in 6 chance to chute down 1 level)"""),
+        (11, 11, "Chimney up 1 level",
+            """
+            passage continues, check again in 30'"""),
+        (12, 12, "Chimney up 2 levels",
+            """
+            passage continues, check again in 30'"""),
+        (13, 13, "Chimney down 2 levels",
+            """
+            passage continues, check again in 30'"""),
+        (14, 16, "Trap door down 1 level",
+            """
+            passage continues, check again in 30'"""),
+        (17, 17, "Trap door down 2 levels",
+            """
+            passage continues, check again in 30'"""),
+        (18, 20, "Up 1 then down 2",
+            """
+            (total down 1), chamber at end roll on TABLE V.)"""),
+        ]],
+    ["VII", "TRICK/TRAP", 20, [
+        (1, 5, "Secret Door",
+            """
+            unless unlocated:  Non-elf locates 3 in 20, elf locates 5 in
+            20, magical device locates 18 in 20 (then see TABLE II.). Unlocated
+            secret doors = <<Pit 10' deep, 3 in 6 to fall in.>>"""),
+        (6, 7, "Pit 10' deep, 3 in 6 to fall in."),
+        (8, 8, "Pit 10' deep with spikes, 3 in 6 to fall in."),
+        (9, 9, "20' x 20' elevator room",
+            """
+            (party has entered door directly
+            ahead and is in room), descends 1 level and will not ascend for 30
+            turns."""),
+        (10, 10, "20' x 20' elevator room",
+            """
+            (party has entered door directly ahead and is in room), descends
+            2 level and will not ascend for 30 turns."""),
+        (11, 11,  "20' x 20' elevator room",
+            """
+            (party has entered door directly ahead and is in room), descends
+            2-5 levels -- 1 upon entering and 1 additional level each time an
+            unsuccessful attempt at door opening is made, or until it descends
+            as far as it can. This will not ascend for 60 turns."""),
+        (12, 12, "Wall",
+            """
+            10' behind slides across passage blocking it for 40-60 turns."""),
+        (13, 13, "Oil",
+            """
+             (equal to one flask) pours on random person from hole in ceiling,
+             followed by flaming cinder (2-12 h.p. damage unless successful
+             save vs. magic is made, which indicates only 1-3 h.p.
+             damage)."""),
+        # TODO: FINISH THIS
+        ]],
 ]  # END OF THE TABLE OF TABLES AKA APPENDIC A
