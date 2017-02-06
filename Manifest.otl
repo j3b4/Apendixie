@@ -1,8 +1,28 @@
 Appendixie
-TODO
-	[_] Die roller
-	[_] Tables
-Elements
+TODO Actions
+	[X] Die roller
+		: works as ordered!
+	[X] Tables
+		: All the Appendix A tables are now available in game with the 
+		: "table" command. It is possible to override the die roll in advance.
+		: Another interesting over ride would be to simply print out every
+		: result.
+	[_] Menus for Tables
+		: This would replace or be an alternative to the table commands,
+		: instead of passing arguments to table, the command would open up a
+		: menu that let you choose from the tables. Ideal for leading ppl
+		: through the various linked tables. BUT... difficult with manual
+		: building.
+	[_] Building Commands/guide
+		: Add a building command field to each table result, So that after
+		: rolling. The table would suggest an Evennia building command and
+		: proper arguments to implement the suggestion from the table.
+	[_] Auto-build prompt
+		: When showing the suggested command, prompt the player to accept the
+		: suggestion, implementing it
+		: immediately.commands.default.muxcommand.MuxCommand. 
+
+talk is cheap
 	New objects
 		new_exit
 			: new_exits are objects that look like exits until traversed, then
