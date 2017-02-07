@@ -450,7 +450,7 @@ TABLES = [  # APPENDIX_A
             3 = wisdom       6 = charisma
             (add or subtract from 1-3 points, checking for each character as to
             addition or subtraction, characteristic, and amount)."""),
-        (16, 17, "Talking Pool",
+        (16, 17, "Talking Pool <<Wishes>>",
             """
              Talking pool which will grant 1 wish to characters of its
              alignment and damage others from 1-20 points. Wish can be withheld

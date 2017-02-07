@@ -1,5 +1,19 @@
 Appendixie
 TODO Actions
+	[_] Play Stormer help:
+		: Mostly just helpful prompts to let them play how I've already been
+		: playing.
+		[_] Start comand
+			: instructions to please start by digging an exit with your own
+			: name to your first room. Then start on Table V.
+		[_] Some Place desc
+			: let the default text of a tun destination be a reminder to roll
+			: on Table I
+		[_] Door rules
+			: explain how to implement doors.
+		[_] Directional Advice
+			: left right what?
+	[_] Automagic:
 	[X] Die roller
 		: works as ordered!
 	[X] Tables
