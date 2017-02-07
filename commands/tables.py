@@ -8,6 +8,7 @@ from commands.command import MuxCommand
 # from evennia.commands.default.muxcommand import MuxCommand as MuxCommand
 from world.tables import TABLES as tableset
 from random import randint
+from textwrap import dedent
 
 
 class CmdTable(MuxCommand):
@@ -23,7 +24,7 @@ class CmdTable(MuxCommand):
     Examples:
         table           ----> prints a list of tables
         table II.a      ----> rolls a d20 on table II.a
-        table II.a = 20 -----> overides the dices and chooses the result for 20
+        table II.a = 20 -----> overides the die roll and chooses the result 20
 
     Alias:
         tr
@@ -32,7 +33,7 @@ class CmdTable(MuxCommand):
     key = "table"
     aliases = ["tr"]
     help_category = "Table Commands"
-    usage = "usage: table [<numeral>] [= <dice result>]"
+    usage = "usage: table [Numeral] [= <dice result>]"
 
     def func(self):
         caller = self.caller
@@ -79,25 +80,29 @@ class CmdTable(MuxCommand):
             return
 
         die_size = tableset[tab_no][2]  # 3rd collumn has dice type number
-        caller.msg("You roll a d%s and check Table %s" % (die_size, tab_name))
 
         if overide:
             roll = int(overide)
         else:
             roll = randint(1, die_size)
 
-        caller.msg("You rolled a %s\n-----------------\n" % roll)
+        caller.msg("You rolled a %s on a d%s\n-----------------\n" % (roll,
+                   die_size))
+        caller.msg("You check Table %s" % tab_name)
         name = ""
         desc = ""
+        build = ""
 
         # look up roll on the table
         for n in tableset[tab_no][3]:
             if n[0] <= roll and n[1] >= roll:
                 name = n[2]
-                if len(n) == 4:
-                    desc = n[3]
+                if len(n) >= 4:
+                    desc = dedent(n[3])
+                if len(n) == 5:
+                    build = dedent(n[4])
                 break
-        result = ("%s: %s" % (name, desc))
+        result = ("{C%s{n %s\n%s" % (name, desc, build))
         caller.msg(result)
         # print table
     pass

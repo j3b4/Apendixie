@@ -6,11 +6,19 @@
 # mismatch with the actual length of the table list.  Avoiding this would
 # require some sort of a check.
 
+# TODO: Appending "builder" hints to to the table results.
+
 TABLES = [  # APPENDIX_A
     ["Numeral", "Table Name", ],
     ["I", "PERIODIC CHECK", 20, [
-        (1, 2, "Continue Straight", """
-         -- check again in 60' (this table)"""),
+        (1, 2, "Continue Straight",
+            """
+            -- check again in 60' (this table)""",
+            """
+            {gBuilder Notes:{nTry {w@name{n 'ing this room "passageway" then
+            try {w@tunnel{n the direction you're going and name the next room
+            "passageway as well. From that room {w@tunnel{n blindly into the
+            next room and re-roll from there."""),
         (3, 5, "Door",
             """
             (see Table II.) <roll on Table II.a first, then II.b>"""),
@@ -30,7 +38,9 @@ TABLES = [  # APPENDIX_A
         (18, 18, "Dead End",
             """
             (walls left, right, and ahead can be checked for Secret
-            Doors, see Table V.D., footnote)"""),
+            Doors, see Table V.D., footnote) <<Actually no, that wont work so
+            don't bother. It's just a dead end.>>
+            """),
         (19, 19, "Trick/Trap",
             """
             (See Table VII.), passage continues -- check again in
@@ -449,7 +459,8 @@ TABLES = [  # APPENDIX_A
             2 = intelligence 5 = constitution
             3 = wisdom       6 = charisma
             (add or subtract from 1-3 points, checking for each character as to
-            addition or subtraction, characteristic, and amount)."""),
+            addition or subtraction, characteristic, and amount).
+            """),
         (16, 17, "Talking Pool <<Wishes>>",
             """
              Talking pool which will grant 1 wish to characters of its
