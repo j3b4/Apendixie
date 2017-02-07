@@ -3,6 +3,12 @@ TODO Actions
 	[_] Play Stormer help:
 		: Mostly just helpful prompts to let them play how I've already been
 		: playing.
+		: But also some critical tools like the editor
+		[_] General Help
+			: help via a command
+		[_] Enable Editor in several commands.
+			: either overload desc maybe by adding a switch, or create a
+			: ans @edesc command to "edit descriptions"
 		[_] Start comand
 			: instructions to please start by digging an exit with your own
 			: name to your first room. Then start on Table V.
@@ -14,6 +20,7 @@ TODO Actions
 		[_] Directional Advice
 			: left right what?
 	[_] Automagic:
+		
 	[X] Die roller
 		: works as ordered!
 	[X] Tables
@@ -35,7 +42,9 @@ TODO Actions
 		: When showing the suggested command, prompt the player to accept the
 		: suggestion, implementing it
 		: immediately.commands.default.muxcommand.MuxCommand. 
-
+Post Appendixie
+	: Down the road I'd like to transition to a new game based on this idea
+	: of random building and adventuring in tandem.
 talk is cheap
 	New objects
 		new_exit
