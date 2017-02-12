@@ -52,7 +52,7 @@ class SimpleDoor(DefaultExit):
 
         """
         self.locks.add(lockstring)
-        self.db.return_exit.locks.add(lockstring)
+        # self.db.return_exit.locks.add(lockstring)
 
     def setdesc(self, description):
         """
@@ -63,16 +63,16 @@ class SimpleDoor(DefaultExit):
 
         """
         self.db.desc = description
-        self.db.return_exit.db.desc = description
+        # self.db.return_exit.db.desc = description
 
     def delete(self):
         """
         Deletes both sides of the door.
-
         """
+
         # we have to be careful to avoid a delete-loop.
-        if self.db.return_exit:
-            super(SimpleDoor, self.db.return_exit).delete()
+        # if self.db.return_exit:
+        #    super(SimpleDoor, self.db.return_exit).delete()
         super(SimpleDoor, self).delete()
         return True
 
@@ -103,15 +103,21 @@ class CmdOpen(default_cmds.CmdOpen):
             del self.return_exit_already_created
             return
         # create a new exit as normal
-        new_exit = super(CmdOpen, self).create_exit(exit_name, location, destination,
-                                                    exit_aliases=exit_aliases, typeclass=typeclass)
+        new_exit = super(CmdOpen, self).create_exit(exit_name, location,
+                                                    destination,
+                                                    exit_aliases=exit_aliases,
+                                                    typeclass=typeclass)
         if inherits_from(new_exit, SimpleDoor):
-            # a door - create its counterpart and make sure to turn off the default
-            # return-exit creation of CmdOpen
-            self.caller.msg("Note: A door-type exit was created - ignored eventual custom return-exit type.")
+            # a door - create its counterpart and make sure to turn off the
+            # default return-exit creation of CmdOpen
+            self.caller.msg("Note: A door-type exit was created - "
+                            "ignored eventual custom return-exit type.")
             self.return_exit_already_created = True
-            back_exit = super(CmdOpen, self).create_exit(exit_name, destination, location,
-                                                         exit_aliases=exit_aliases, typeclass=typeclass)
+            back_exit = super(
+                CmdOpen, self).create_exit(exit_name, destination,
+                                           location,
+                                           exit_aliases=exit_aliases,
+                                           typeclass=typeclass)
             new_exit.db.return_exit = back_exit
             back_exit.db.return_exit = new_exit
         return new_exit
@@ -155,10 +161,10 @@ class CmdOpenCloseDoor(default_cmds.MuxCommand):
             else:
                 door.setlock("traverse:true()")
                 self.caller.msg("You open %s." % door.key)
-        else: # close
+        else:  # close
             if not door.locks.check(self.caller, "traverse"):
                 self.caller.msg("%s is already closed." % door.key)
             else:
                 door.setlock("traverse:false()")
                 self.caller.msg("You close %s." % door.key)
-
+# END

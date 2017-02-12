@@ -32,7 +32,7 @@ TABLES = [  # APPENDIX_A
             check again in 30' (this table)"""),
         (14, 16, "Chamber",
             """
-            (See Table V.) -- check 30' after leaving
+            (See Table V.ch) -- check 30' after leaving
             (this table)"""),
         (17, 17, "Stairs", "(see Table VI.)"),
         (18, 18, "Dead End",
@@ -69,7 +69,7 @@ TABLES = [  # APPENDIX_A
             ***The direction will be appropriate to existing circumstances,
             but use the direction before the slash in preference to the
             other."""),
-        (11, 18, "Room", "(Go to Table V.room)"),
+        (11, 18, "Room", "(Go to Table V.ro)"),
         (19, 20, "Chamber", "(Go to Table V.chamber)"),
         ]],
     ["III", "SIDE PASSAGES", 20, [
