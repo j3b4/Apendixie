@@ -1,5 +1,12 @@
 Appendixie
 TODO Actions
+	[_] Doors
+		: Doors can be places with @tun/door of @door command.
+		: This creates an exit which can be openned of closed. I cannot be
+		: traversed unless open. The problem is that the commands only work on
+		: one side of the door at a time. To fix this I belive I have to
+		: rewrite the @tunnel command to use create_exit and link the two
+		: sides of the door (two diff exits) at creation time.
 	[_] Play Stormer help:
 		: Mostly just helpful prompts to let them play how I've already been
 		: playing.
