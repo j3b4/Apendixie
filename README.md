@@ -1,36 +1,24 @@
-# Welcome to Evennia!
+# Welcome to Apendixie!
+Apendixie is based on the Appendix A of the Advanced Dungeons and Dragons
+Dungeon Master Guide by Gary Gygax (1979). Appendix A is a set of tables that
+purported to allow you to create random dungeons, populated with tricks, traps,
+treasure, and monsters. The whole thing is available online at Wizards of the
+Coast here: https://www.wizards.com/dnd/files/excerpts/excerpt_dmg4.pdf
 
-This is your game directory, set up to let you start with
-your new game right away. An overview of this directory is found here:
-https://github.com/evennia/evennia/wiki/Directory-Overview#the-game-directory
+This game replicates Appendix A, down to its typos and quirky punctuation (as
+best as I was able). By using the "table" command in-game you can reference
+authentic random results from the old DMG while making your building decisions.
 
-You can delete this readme file when you've read it and you can
-re-arrange things in this game-directory to suit your own sense of
-organisation (the only exception is the directory structure of the
-`server/` directory, which Evennia expects). If you change the structure
-you must however also edit/add to your settings file to tell Evennia
-where to look for things.
+If you have read this far, and are kind enough to participate---I wouldn't call
+it 'play testing' more like 'play-storming'. By all means log in and create a
+character.
 
-Your game's main configuration file is found in
-`server/conf/settings.py` (but you don't need to change it to get
-started). If you just created this directory (which means you'll already
-have a `virtualenv` running if you followed the default instructions),
-`cd` to this directory then initialize a new database using
+# Development plan
+Manifest.otl contains the latest actual plans and ideas. However I may use the
+wiki as well to flesh out ideas.  In particular for the future game based on
+the idea contained in this one.
 
-    evennia migrate
-
-To start the server, stand in this directory and run
-
-    evennia start
-
-This will start the server, logging output to the console. Make
-sure to create a superuser when asked. By default you can now connect
-to your new game using a MUD client on `localhost`, port `4000`.  You can 
-also log into the web client by pointing a browser to
-`http://localhost:8000`.
-
-# Getting started
-
+# Evennia Documentation:
 From here on you might want to look at one of the beginner tutorials:
 http://github.com/evennia/evennia/wiki/Tutorials.
 
