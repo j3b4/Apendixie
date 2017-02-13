@@ -21,7 +21,12 @@ TABLES = [  # APPENDIX_A
             next room and re-roll from there."""),
         (3, 5, "Door",
             """
-            (see Table II.) <roll on Table II.a first, then II.b>"""),
+            (see Table II.) <roll on Table II.a first, then II.b>"""
+            """
+            {gBuilder Notes:{nOnce you figure out the doors location, use the
+            {w@door{n command to place a door in the appropriate direction.
+            By default the door is open, go through it and roll on II.b to find
+            out what's there."""),
         (6, 10, "Side Passage",
             """
             (see Table III.) -- check again in 30'

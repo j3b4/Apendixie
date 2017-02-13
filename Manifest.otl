@@ -1,5 +1,12 @@
 Appendixie
 TODO Actions
+	[_] Evil links
+		: opportunity to link doors and passages to eachother - @tun and @door
+		: commands each generate a "new" room
+		: upon editing/building rooms are usually renamed. The plan is to
+		: program an option to link "new rooms" with other "new rooms" on
+		: creation ... also occasionally link via secret or one-way door to
+		: previously built rooms.
 	[_] Doors
 		: Doors can be places with @tun/door of @door command.
 		: This creates an exit which can be openned of closed. I cannot be
@@ -7,25 +14,24 @@ TODO Actions
 		: one side of the door at a time. To fix this I belive I have to
 		: rewrite the @tunnel command to use create_exit and link the two
 		: sides of the door (two diff exits) at creation time.
+		plan - rebuild my @tunnel command
+			: so that it can set attributes at start time.
 	[_] Play Stormer help:
 		: Mostly just helpful prompts to let them play how I've already been
 		: playing.
 		: But also some critical tools like the editor
-		[_] General Help
+		[X] General Help
 			: help via a command
-		[_] Enable Editor in several commands.
+		[X] Enable Editor in several commands.
 			: either overload desc maybe by adding a switch, or create a
 			: ans @edesc command to "edit descriptions"
+			Actually that was built in by default to desc
 		[_] Start comand
 			: instructions to please start by digging an exit with your own
 			: name to your first room. Then start on Table V.
 		[_] Some Place desc
 			: let the default text of a tun destination be a reminder to roll
 			: on Table I
-		[_] Door rules
-			: explain how to implement doors.
-		[_] Directional Advice
-			: left right what?
 	[_] Automagic:
 		
 	[X] Die roller

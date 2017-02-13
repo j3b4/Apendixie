@@ -86,8 +86,11 @@ class CmdTable(MuxCommand):
         else:
             roll = randint(1, die_size)
 
-        caller.msg("You rolled a %s on a d%s\n-----------------\n" % (roll,
+        caller.msg("You rolled a %s on a d%s\n" % (roll,
                    die_size))
+        caller.location.msg_contents("%s rolled a %s on a d%s\n" %
+                                     (caller.name, roll, die_size),
+                                     exclude=caller)
         caller.msg("You check Table %s" % tab_name)
         name = ""
         desc = ""
@@ -104,5 +107,6 @@ class CmdTable(MuxCommand):
                 break
         result = ("{C%s{n %s\n%s" % (name, desc, build))
         caller.msg(result)
+        caller.location.msg_contents(result, exclude=caller)
         # print table
     pass
