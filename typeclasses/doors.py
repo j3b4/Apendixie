@@ -52,7 +52,7 @@ class SimpleDoor(DefaultExit):
 
         """
         self.locks.add(lockstring)
-        # self.db.return_exit.locks.add(lockstring)
+        self.db.return_exit.locks.add(lockstring)
 
     def setdesc(self, description):
         """
@@ -85,7 +85,7 @@ class SimpleDoor(DefaultExit):
                 attempting the traversal.
 
         """
-        traversing_object.msg("%s is closed right up. Open it!" % self.key)
+        traversing_object.msg("%s is closed!" % self.key)
 
 
 class CmdOpen(default_cmds.CmdOpen):

@@ -11,7 +11,7 @@ from django.conf import settings
 # from evennia.locks.lockhandler import LockException
 # from evennia.commands.cmdhandler import get_and_merge_cmdsets
 # from evennia.utils import create, utils, search
-# from evennia.utils import create
+from evennia.utils import create
 # from evennia.utils.utils import inherits_from, class_from_module
 from evennia.utils.utils import class_from_module
 # from evennia.utils.eveditor import EvEditor
@@ -40,7 +40,6 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
 
     Switches:
       oneway - do not create an exit back to the current location
-      tel - teleport to the newly created room
       door - Creates a Simple Door exit
 
     Example:
@@ -78,8 +77,15 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
                   "i": ("in", "o"),
                   "o": ("out", "i")}
 
+    new_room_lockstring = "control:id({id}) or perm(Wizards); " \
+                          "delete:id({id}) or perm(Wizards); " \
+                          "edit:id({id}) or perm(Wizards)"
+
     def func(self):
         "Implements the tunnel command"
+
+        caller = self.caller
+        location = caller.location
 
         if not self.args or not self.lhs:
             string = ("Usage: @tunnel[/switch] <direction>"
@@ -102,20 +108,24 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
         if self.cmdstring == "@door":
             self.switches.append("door")
 
-        telswitch = ""
-        if "tel" in self.switches:
-            telswitch = "/teleport"
         backstring = ""
+
+        # later set more custome room types
+        # esp to set context ie. "in a passage" v. "behind a door"
+        roomclass = settings.BASE_ROOM_TYPECLASS
         doorclass = "typeclasses.doors.SimpleDoor"
+        typeclass = ""
         # if not "oneway" in self.switches:
         if "door" in self.switches:
             roomname = "new space beyond a door (table II.b)"
+            typeclass = doorclass
             exitname = "%s door" % exitname
-            exitshort = "%s:%s" % (exitshort, doorclass)
+            # exitshort = "%s:%s" % (exitshort, doorclass)
             backname = "%s door" % backname
         else:
             exitname = "%sern passage" % exitname
             backname = "%sern passage" % backname
+            typeclass = settings.BASE_EXIT_TYPECLASS
         if "oneway" not in self.switches:
             backstring = ", %s;%s" % (backname, backshort)
             if "door" in self.switches:
@@ -124,9 +134,57 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
         if self.rhs:
             roomname = self.rhs  # this may include aliases; that's fine.
 
-        # build the string we will use to call @dig
-        digstring = "@dig%s %s = %s;%s%s" % (telswitch, roomname,
-                                             exitname, exitshort, backstring)
-        self.execute_cmd(digstring)
+        # TODO: Call the create room and exit commands
+
+        # create the room
+        new_room = create.create_object(roomclass, roomname, report_to=caller)
+        lockstring = self.new_room_lockstring.format(id=caller.id)
+        new_room.locks.add(lockstring)
+        room_string = "Created room %s(%s)" % (new_room, new_room.dbref)
+
+        # create exits to the room
+
+        exit_to_string = ""
+        exit_back_string = ""
+
+        # If door  = then typeclass will match here.
+        new_to_exit = create.create_object(typeclass, exitname, location,
+                                           locks=lockstring,
+                                           aliases=exitshort,
+                                           destination=new_room,
+                                           report_to=caller)
+        alias_string = ""
+        if new_to_exit.aliases.all():
+            alias_string = " (%s)" % ", ".join(new_to_exit.aliases.all())
+        exit_to_string = "\nCreated Exit from %s to %s: %s(%s)%s."
+        exit_to_string = exit_to_string % (location.name,
+                                           new_room.name,
+                                           new_to_exit,
+                                           new_to_exit.dbref,
+                                           alias_string)
+
+        # create back exits from room
+        if "oneway" not in self.switches:
+            new_back_exit = create.create_object(typeclass, backname, new_room,
+                                                 aliases=backshort,
+                                                 locks=lockstring,
+                                                 destination=location,
+                                                 report_to=caller)
+            alias_string = ""
+            if new_back_exit.aliases.all():
+                alias_string = " (%s)" % ", ".join(new_back_exit.aliases.all())
+            exit_back_string = "\nCreated Exit back from %s to %s: %s(%s)%s."
+            exit_back_string = exit_back_string % (new_room.name,
+                                                   location.name,
+                                                   new_back_exit,
+                                                   new_back_exit.dbref,
+                                                   alias_string)
+        caller.msg("%s%s%s" % (room_string, exit_to_string, exit_back_string))
+
+        # if inherits_from(new_exit, SimpleDoor):
+        if "door" in self.switches:
+            # link exits
+            new_to_exit.db.return_exit = new_back_exit
+            new_back_exit.db.return_exit = new_to_exit
 
 # last line
