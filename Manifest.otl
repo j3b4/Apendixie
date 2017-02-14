@@ -1,4 +1,26 @@
 Appendixie
+Feature Requests:
+	Direction Translation
+		left right 
+		: each exit has a direction  and upon passing through - the player is
+		: aligned that way.  Then left, right, fwd and behind ... are all
+		: relative.
+	Lookable exits
+		: looking at an exit should return a description (possibly brief
+		: version) of the destination room.
+	Menus
+		New-room triggers menus - contextualize it all
+			: so entering a "new room" will automatically roll on the
+			: appropriate table
+	Monsters
+		copy the demo NPC?
+		: I think it is able to follow the PC and attack until you die. Death
+		: transports you to the cave.
+	Journal/Reporting
+	Combat RP
+		Invenet a combat system that uses narrative rp
+	Magic System?
+		RP based magic? Can it work?
 TODO Actions
 	[_] Evil links
 		: opportunity to link doors and passages to eachother - @tun and @door
@@ -7,40 +29,17 @@ TODO Actions
 		: program an option to link "new rooms" with other "new rooms" on
 		: creation ... also occasionally link via secret or one-way door to
 		: previously built rooms.
-	[_] Doors
-		: Doors can be places with @tun/door of @door command.
-		: This creates an exit which can be openned of closed. I cannot be
-		: traversed unless open. The problem is that the commands only work on
-		: one side of the door at a time. To fix this I belive I have to
-		: rewrite the @tunnel command to use create_exit and link the two
-		: sides of the door (two diff exits) at creation time.
-		plan - rebuild my @tunnel command
-			: so that it can set attributes at start time.
 	[_] Play Stormer help:
 		: Mostly just helpful prompts to let them play how I've already been
 		: playing.
 		: But also some critical tools like the editor
-		[X] General Help
-			: help via a command
-		[X] Enable Editor in several commands.
-			: either overload desc maybe by adding a switch, or create a
-			: ans @edesc command to "edit descriptions"
-			Actually that was built in by default to desc
 		[_] Start comand
 			: instructions to please start by digging an exit with your own
 			: name to your first room. Then start on Table V.
-		[_] Some Place desc
+		[X] Some Place desc
 			: let the default text of a tun destination be a reminder to roll
 			: on Table I
 	[_] Automagic:
-		
-	[X] Die roller
-		: works as ordered!
-	[X] Tables
-		: All the Appendix A tables are now available in game with the 
-		: "table" command. It is possible to override the die roll in advance.
-		: Another interesting over ride would be to simply print out every
-		: result.
 	[_] Menus for Tables
 		: This would replace or be an alternative to the table commands,
 		: instead of passing arguments to table, the command would open up a
@@ -55,10 +54,37 @@ TODO Actions
 		: When showing the suggested command, prompt the player to accept the
 		: suggestion, implementing it
 		: immediately.commands.default.muxcommand.MuxCommand. 
+Done Actions
+	[X] Die roller
+		: works as ordered!
+	[X] Tables
+		: All the Appendix A tables are now available in game with the 
+		: "table" command. It is possible to override the die roll in advance.
+		: Another interesting over ride would be to simply print out every
+		: result.
+	[X] General Help
+		: help via a command
+	[X] Enable Editor in several commands.
+		: either overload desc maybe by adding a switch, or create a
+		: ans @edesc command to "edit descriptions"
+		Actually that was built in by default to desc
+	[X] Doors
+		: Doors can be places with @tun/door of @door command.
+		: This creates an exit which can be openned of closed. I cannot be
+		: traversed unless open. The problem is that the commands only work on
+		: one side of the door at a time. To fix this I belive I have to
+		: rewrite the @tunnel command to use create_exit and link the two
+		: sides of the door (two diff exits) at creation time.
+		[X] plan - rebuild my @tunnel command
+			: so that it can set attributes at start time.
 Post Appendixie
 	: Down the road I'd like to transition to a new game based on this idea
 	: of random building and adventuring in tandem.
 talk is cheap
+	LIMBO
+		not the boring place where babies and old men go..
+		but the crazy chaotic land as described by TSR
+		Pandemonium sounds good too.
 	New objects
 		new_exit
 			: new_exits are objects that look like exits until traversed, then
@@ -93,6 +119,3 @@ talk is cheap
 		:
 		: No need a new object type - that looks like an exit or a room but
 		: triggers the correct 
-	Objects
-		: hmm
-		:
