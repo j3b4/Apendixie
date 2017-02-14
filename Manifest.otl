@@ -17,11 +17,21 @@ Feature Requests:
 		: I think it is able to follow the PC and attack until you die. Death
 		: transports you to the cave.
 	Journal/Reporting
+		: Need to start this in order to try out all the other activities that
+		: depend on it.
+		Journal Script 
+			: Is it a script? What else. Could be an character.db.object
+			at character creation db.journal = ()
+			commands go in the character typeclass
 	Combat RP
 		Invenet a combat system that uses narrative rp
+		subportinate to Journalling
 	Magic System?
 		RP based magic? Can it work?
+		subportinate to Journalling
 TODO Actions
+	[_] Journal
+		free form journaling
 	[_] Evil links
 		: opportunity to link doors and passages to eachother - @tun and @door
 		: commands each generate a "new" room
