@@ -19,6 +19,7 @@ from evennia.contrib.dice import CmdDice
 from typeclasses.doors import CmdOpen, CmdOpenCloseDoor
 from tables import CmdTable
 from building import CmdTunnel
+from journal import CmdUpdateJournal, CmdReadJournal
 
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
@@ -41,6 +42,8 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(CmdOpenCloseDoor())
         self.add(CmdTable())
         self.add(CmdTunnel())
+        self.add(CmdUpdateJournal())
+        self.add(CmdReadJournal())
 
 
 class PlayerCmdSet(default_cmds.PlayerCmdSet):

@@ -1,37 +1,22 @@
 Appendixie
-Feature Requests:
-	Direction Translation
-		left right 
-		: each exit has a direction  and upon passing through - the player is
-		: aligned that way.  Then left, right, fwd and behind ... are all
-		: relative.
-	Lookable exits
-		: looking at an exit should return a description (possibly brief
-		: version) of the destination room.
-	Menus
-		New-room triggers menus - contextualize it all
-			: so entering a "new room" will automatically roll on the
-			: appropriate table
-	Monsters
-		copy the demo NPC?
-		: I think it is able to follow the PC and attack until you die. Death
-		: transports you to the cave.
-	Journal/Reporting
-		: Need to start this in order to try out all the other activities that
-		: depend on it.
+TODO Actions
+	[_] Journal
+		[_] free form journaling
+			[_] add update_journal command
+		[_] Autojournaling
+			add methods
+			determine which commands and actions will trigger auto-journal
+		Journal parsing
+			collect actions into a "day"
+			add filters to read journal
+				by date
+				by zone
+		Zoning
+			see zone feature request
 		Journal Script 
 			: Is it a script? What else. Could be an character.db.object
 			at character creation db.journal = ()
 			commands go in the character typeclass
-	Combat RP
-		Invenet a combat system that uses narrative rp
-		subportinate to Journalling
-	Magic System?
-		RP based magic? Can it work?
-		subportinate to Journalling
-TODO Actions
-	[_] Journal
-		free form journaling
 	[_] Evil links
 		: opportunity to link doors and passages to eachother - @tun and @door
 		: commands each generate a "new" room
@@ -50,20 +35,46 @@ TODO Actions
 			: let the default text of a tun destination be a reminder to roll
 			: on Table I
 	[_] Automagic:
-	[_] Menus for Tables
+Feature Requests:
+	Zones
+		: Use tags to create dungeon zones.  Presently, Player made dungeons
+		: chould have their own name.
+	Menus for Tables
 		: This would replace or be an alternative to the table commands,
 		: instead of passing arguments to table, the command would open up a
 		: menu that let you choose from the tables. Ideal for leading ppl
 		: through the various linked tables. BUT... difficult with manual
 		: building.
-	[_] Building Commands/guide
+	Building Commands/guide
 		: Add a building command field to each table result, So that after
 		: rolling. The table would suggest an Evennia building command and
 		: proper arguments to implement the suggestion from the table.
-	[_] Auto-build prompt
+	Auto-build prompt
 		: When showing the suggested command, prompt the player to accept the
 		: suggestion, implementing it
 		: immediately.commands.default.muxcommand.MuxCommand. 
+	Direction Translation
+		left right 
+		: each exit has a direction  and upon passing through - the player is
+		: aligned that way.  Then left, right, fwd and behind ... are all
+		: relative.
+	Lookable exits
+		: looking at an exit should return a description (possibly brief
+		: version) of the destination room.
+	Menus
+		New-room triggers menus - contextualize it all
+			: so entering a "new room" will automatically roll on the
+			: appropriate table
+	Monsters
+		copy the demo NPC?
+		: I think it is able to follow the PC and attack until you die. Death
+		: transports you to the cave.
+	Combat RP
+		Invenet a combat system that uses narrative rp
+		subportinate to Journalling
+	Magic System?
+		RP based magic? Can it work?
+		subportinate to Journalling
 Done Actions
 	[X] Die roller
 		: works as ordered!

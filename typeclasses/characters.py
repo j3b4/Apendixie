@@ -35,4 +35,13 @@ class Character(DefaultCharacter):
         "Called when characters are created."
         self.db.journal = []
         # self.db.journal.append(["Time", "Zone", "Room", "Event"])
+
+    def update_journal(self):
+        """
+        A method to add a line ( a list ) to the characters journal. In
+        practice this will be automatically used by various commands and
+        scripts, and sometimes a player will run a command on themselves to
+        update their journal.
+        """
+        # journal = self.db.journal
     pass
