@@ -20,6 +20,7 @@ from typeclasses.doors import CmdOpen, CmdOpenCloseDoor
 from tables import CmdTable
 from building import CmdTunnel
 from journal import CmdUpdateJournal, CmdReadJournal
+from movement import CmdMove
 
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
@@ -44,6 +45,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(CmdTunnel())
         self.add(CmdUpdateJournal())
         self.add(CmdReadJournal())
+        self.add(CmdMove())
 
 
 class PlayerCmdSet(default_cmds.PlayerCmdSet):

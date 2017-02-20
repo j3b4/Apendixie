@@ -1,6 +1,6 @@
 Appendixie
 TODO Actions
-	[_] Relative directions
+	[_] 63% Relative directions
 		: this terrible idea requires me to write code that on one hand tracks
 		: the direction a PC is "facing" while travelling --- by setting it
 		: based on the orientation of the exit used to enter the room --- and
@@ -8,21 +8,34 @@ TODO Actions
 		: south etc.
 		[X] Add a value/tag to every exit
 		[X] Add an attribute to the character module
-		[_] 50% On exit traverse, update the characters direction
+		[_] 33% On exit traverse, update the characters direction
 			[_] on teleport... set a random direction
 			[X] on normal exits
-		[_] Use rotational math (modulus) to translate directions			
-			set up a utility command in world
-		[_] % build some movement commands that work on this method
-			[_] forward
-			[_] back
-			[_] left
-			[_] right
-			[_] slight left
-			[_] slight right
-			[_] slight back and left
-			[_] slight back and right
-		[_] Why am I doing this to myself?
+			[_] up/down or special exits
+		[X] Use rotational math (modulus) to translate directions			
+			[X] set up a utility command in world
+		[_] 50% build some movement commands that work on this method
+			[X] 100% directional moves
+				[X] forward
+				[X] back
+				[X] left
+				[X] right
+				[X] slight left
+				[X] slight right
+				[X] slight back and left
+				[X] slight back and right
+			[_] allow shortcut movement commands
+				[_] aliases for move right = r
+				[_] twitchy movement (arrows or number pad)
+		[_] Add a compass object.
+			: possession of which causes the players current direction to
+			: display at every "look" return
+		[_] Building commands
+			translate table results into fixed directions
+				: now that I've proved I can do this. I'm still reconsidering
+				: whether I want to include this function in the autobuild
+				: commands anyways.
+				: probably time to quit this silliness anyways.
 	[_] Journal
 		[_] free form journaling
 			[_] add update_journal command
