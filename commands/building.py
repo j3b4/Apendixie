@@ -72,10 +72,12 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
                   "sw": ("southwest", "ne"),
                   "w": ("west", "e"),
                   "nw": ("northwest", "se"),
-                  "u": ("up", "d"),
-                  "d": ("down", "u"),
-                  "i": ("in", "o"),
-                  "o": ("out", "i")}
+                  # "u": ("up", "d"),
+                  # "d": ("down", "u"),
+                  # "i": ("in", "o"),
+                  # "o": ("out", "i")
+                  # Don't want to use @tun for level changes etc.
+                  }
 
     new_room_lockstring = "control:id({id}) or perm(Wizards); " \
                           "delete:id({id}) or perm(Wizards); " \
@@ -153,6 +155,7 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
                                            aliases=exitshort,
                                            destination=new_room,
                                            report_to=caller)
+        new_to_exit.db.direction = exitshort
         alias_string = ""
         if new_to_exit.aliases.all():
             alias_string = " (%s)" % ", ".join(new_to_exit.aliases.all())
@@ -170,6 +173,7 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
                                                  locks=lockstring,
                                                  destination=location,
                                                  report_to=caller)
+            new_back_exit.db.direction = backshort
             alias_string = ""
             if new_back_exit.aliases.all():
                 alias_string = " (%s)" % ", ".join(new_back_exit.aliases.all())

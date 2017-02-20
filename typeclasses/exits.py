@@ -40,6 +40,12 @@ class Exit(DefaultExit):
                             attribute `err_traverse` is defined, in which case
                             that will simply be echoed.
     """
+    def at_object_creation(self):
+        self.db.direction = ''
+
+    def at_after_traverse(self, traveller, source_loc):
+        'called by at_traverse just'
+        traveller.db.direction = self.db.direction
     pass
 
 

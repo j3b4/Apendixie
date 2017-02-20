@@ -1,5 +1,28 @@
 Appendixie
 TODO Actions
+	[_] Relative directions
+		: this terrible idea requires me to write code that on one hand tracks
+		: the direction a PC is "facing" while travelling --- by setting it
+		: based on the orientation of the exit used to enter the room --- and
+		: on the other hand translate left/right/ahead/bening into north or
+		: south etc.
+		[X] Add a value/tag to every exit
+		[X] Add an attribute to the character module
+		[_] 50% On exit traverse, update the characters direction
+			[_] on teleport... set a random direction
+			[X] on normal exits
+		[_] Use rotational math (modulus) to translate directions			
+			set up a utility command in world
+		[_] % build some movement commands that work on this method
+			[_] forward
+			[_] back
+			[_] left
+			[_] right
+			[_] slight left
+			[_] slight right
+			[_] slight back and left
+			[_] slight back and right
+		[_] Why am I doing this to myself?
 	[_] Journal
 		[_] free form journaling
 			[_] add update_journal command
@@ -39,6 +62,39 @@ Feature Requests:
 	Zones
 		: Use tags to create dungeon zones.  Presently, Player made dungeons
 		: chould have their own name.
+		Auto-zone:
+			: @tunnel and @dig create rooms, they need to know certain things
+			: about the current zone, Only the character object can track.
+			: Then when a character object calles @tunnel - it should pass the
+			: characters current location ... well starting location stores a
+			: zone too... so self.caller.location.tags is available. 
+			:
+			: Hmmm. @dig could me modified to take a zone argument. @dig
+			: should probably set it, either require a zone or assume
+			: something.
+			:
+			: Also it might be a good idea to set a warning, that shows up in
+			: every room desc if it's missing a zone. This will remind me to
+			: manually fix the zone.
+			@tunnel: tag new rooms with a zone matching self.caller.location
+		Starting Dungeon name
+			See start command feature req.
+		Dungeon Levels
+			: Levels should also be tags. Same thing applies.
+			@tunnel: tag new room with matching level tag
+				unless direction = up or down then level changes.
+		Zone and Level limits
+			: this suggests perhaps setting some hard or soft size limits on
+			: dungeons/zones and levels.  I.e. maybe set a max number of rooms
+			: per level and a max number of levels to the dungeon.
+		Level consequences
+			: certain level can have hard coded rooms, events, encounters a la
+			: nethack.
+		Non-random zones
+			: Builder can set up special zones
+		Wilderness zone
+			: one level. Non ramdom, or totally diff. tables.
+		Town Zone
 	Menus for Tables
 		: This would replace or be an alternative to the table commands,
 		: instead of passing arguments to table, the command would open up a
@@ -106,6 +162,17 @@ talk is cheap
 		not the boring place where babies and old men go..
 		but the crazy chaotic land as described by TSR
 		Pandemonium sounds good too.
+	AD&D or what?
+		: decide if and when to ditch the  AD&D DMG tables and build upon a
+		: logical foundation of dungeon generation that is better suited for
+		: the MUD play.
+		Better foundation
+			no need for relative directions
+			less immaterial description tables
+				or replace with more interesting tables
+			tweak the tables 
+		AD&D kitsch value
+Obsolete/trash
 	New objects
 		new_exit
 			: new_exits are objects that look like exits until traversed, then

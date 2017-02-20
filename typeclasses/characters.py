@@ -34,6 +34,7 @@ class Character(DefaultCharacter):
     def at_object_creation(self):
         "Called when characters are created."
         self.db.journal = []
+        self.db.direction = ''
         # self.db.journal.append(["Time", "Zone", "Room", "Event"])
 
     def update_journal(self):
