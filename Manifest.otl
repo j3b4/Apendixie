@@ -1,5 +1,23 @@
 Appendixie
 TODO Actions
+	[_] % Automagic:
+		[_] % Triggering the builder
+			: The builder is a script maybe? I dont know.
+			[_] evmenu time
+				[_] learn menus - create test menu that talkes about building
+					: just write a menu module in the World folder for now
+					: load it with @py and activate it.
+			[_] make something happen when a PC walks into a random node
+				triggers or scripts or something
+				: entering a room with the new node tag will cause the PC to
+				: enter the menu
+			[_] teach test menu to roll on the tables
+				: figure this out
+				: sigh
+		Auto-build prompt
+			: When showing the suggested command, prompt the player to accept
+			: the suggestion, implementing it
+			: immediately.commands.default.muxcommand.MuxCommand. 
 	[_] 63% Relative directions
 		: this terrible idea requires me to write code that on one hand tracks
 		: the direction a PC is "facing" while travelling --- by setting it
@@ -36,6 +54,10 @@ TODO Actions
 				: whether I want to include this function in the autobuild
 				: commands anyways.
 				: probably time to quit this silliness anyways.
+		Direction Translation
+			: each exit has a direction  and upon passing through - the player
+			: is aligned that way.  Then left, right, fwd and behind ... are
+			: all relative.
 	[_] Journal
 		[_] free form journaling
 			[_] add update_journal command
@@ -53,24 +75,6 @@ TODO Actions
 			: Is it a script? What else. Could be an character.db.object
 			at character creation db.journal = ()
 			commands go in the character typeclass
-	[_] Evil links
-		: opportunity to link doors and passages to eachother - @tun and @door
-		: commands each generate a "new" room
-		: upon editing/building rooms are usually renamed. The plan is to
-		: program an option to link "new rooms" with other "new rooms" on
-		: creation ... also occasionally link via secret or one-way door to
-		: previously built rooms.
-	[_] Play Stormer help:
-		: Mostly just helpful prompts to let them play how I've already been
-		: playing.
-		: But also some critical tools like the editor
-		[_] Start comand
-			: instructions to please start by digging an exit with your own
-			: name to your first room. Then start on Table V.
-		[X] Some Place desc
-			: let the default text of a tun destination be a reminder to roll
-			: on Table I
-	[_] Automagic:
 Feature Requests:
 	Zones
 		: Use tags to create dungeon zones.  Presently, Player made dungeons
@@ -118,15 +122,6 @@ Feature Requests:
 		: Add a building command field to each table result, So that after
 		: rolling. The table would suggest an Evennia building command and
 		: proper arguments to implement the suggestion from the table.
-	Auto-build prompt
-		: When showing the suggested command, prompt the player to accept the
-		: suggestion, implementing it
-		: immediately.commands.default.muxcommand.MuxCommand. 
-	Direction Translation
-		left right 
-		: each exit has a direction  and upon passing through - the player is
-		: aligned that way.  Then left, right, fwd and behind ... are all
-		: relative.
 	Lookable exits
 		: looking at an exit should return a description (possibly brief
 		: version) of the destination room.
@@ -138,14 +133,34 @@ Feature Requests:
 		copy the demo NPC?
 		: I think it is able to follow the PC and attack until you die. Death
 		: transports you to the cave.
-	Combat RP
-		Invenet a combat system that uses narrative rp
-		subportinate to Journalling
 	Honour System - tunable rp
 		: this system 
+		Combat RP
+			Invenet a combat system that uses narrative rp
+			subportinate to Journalling
+		Engagement system
+			: Obstacles like monsters and traps and weird effects can engage a
+			: player character, 
 	Magic System?
 		RP based magic? Can it work?
 		subportinate to Journalling
+	Play Stormer help:
+		: Mostly just helpful prompts to let them play how I've already been
+		: playing.
+		: But also some critical tools like the editor
+		Start comand
+			: instructions to please start by digging an exit with your own
+			: name to your first room. Then start on Table V.
+		[X] Some Place desc
+			: let the default text of a tun destination be a reminder to roll
+			: on Table I
+[_] Evil links
+	: opportunity to link doors and passages to eachother - @tun and @door
+	: commands each generate a "new" room
+	: upon editing/building rooms are usually renamed. The plan is to
+	: program an option to link "new rooms" with other "new rooms" on
+	: creation ... also occasionally link via secret or one-way door to
+	: previously built rooms.
 Done Actions
 	[X] Die roller
 		: works as ordered!
