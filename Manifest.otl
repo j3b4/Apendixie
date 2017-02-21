@@ -8,9 +8,14 @@ TODO Actions
 					: just write a menu module in the World folder for now
 				[_] learn better
 			[_] make something happen when a PC walks into a random node
-				triggers or scripts or something
 				: entering a room with the new node tag will cause the PC to
 				: enter the menu
+				[_] trigger a menu
+					: BASED ON THE TYPE OF ROOM.
+				[X] unfinished rooms typeclass tag	
+					[X] modify the default character
+						: so that a PC checks every room it enters to detect
+						: an "unfinished room"
 			[_] teach test menu to roll on the tables
 				: figure this out
 				: sigh

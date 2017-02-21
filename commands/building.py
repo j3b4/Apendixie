@@ -142,6 +142,16 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
         new_room = create.create_object(roomclass, roomname, report_to=caller)
         lockstring = self.new_room_lockstring.format(id=caller.id)
         new_room.locks.add(lockstring)
+
+        # tag it as unfinished
+        if typeclass == doorclass:
+            new_room.tags.add("unfinished")
+            new_room.tags.add("afterdoor")
+        else:
+            new_room.tags.add("unfinished")
+            new_room.tags.add("inpasage")
+
+        # report to builder
         room_string = "Created room %s(%s)" % (new_room, new_room.dbref)
 
         # create exits to the room

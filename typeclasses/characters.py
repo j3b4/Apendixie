@@ -37,6 +37,25 @@ class Character(DefaultCharacter):
         self.db.direction = ''
         # self.db.journal.append(["Time", "Zone", "Room", "Event"])
 
+    def at_after_move(self, source_location):
+        """
+
+        We make sure to look around after a move.
+
+        """
+        if self.location.access(self, "view"):
+            self.msg(self.at_look(self.location))
+
+        """
+        Also check for rooms with the unfinished tag
+        """
+        if "unfinished" in self.location.tags.all():
+            self.msg("This room is unfinished!")
+            if "afterdoor" in self.location.tags.all():
+                self.msg("Run table II.b")
+            else:
+                self.msg("Run table I")
+
     def update_journal(self):
         """
         A method to add a line ( a list ) to the characters journal. In
