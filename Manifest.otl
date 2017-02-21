@@ -1,12 +1,12 @@
 Appendixie
 TODO Actions
-	[_] % Automagic:
-		[_] % Triggering the builder
+	[_] 8% Automagic:
+		[_] 16% Triggering the builder
 			: The builder is a script maybe? I dont know.
-			[_] evmenu time
-				[_] learn menus - create test menu that talkes about building
+			[_] 50% evmenu time
+				[X] learn menus - create test menu that talkes about building
 					: just write a menu module in the World folder for now
-					: load it with @py and activate it.
+				[_] learn better
 			[_] make something happen when a PC walks into a random node
 				triggers or scripts or something
 				: entering a room with the new node tag will cause the PC to
@@ -14,11 +14,11 @@ TODO Actions
 			[_] teach test menu to roll on the tables
 				: figure this out
 				: sigh
-		Auto-build prompt
+		[_] Auto-build prompt
 			: When showing the suggested command, prompt the player to accept
 			: the suggestion, implementing it
 			: immediately.commands.default.muxcommand.MuxCommand. 
-	[_] 63% Relative directions
+	[_] 54% Relative directions
 		: this terrible idea requires me to write code that on one hand tracks
 		: the direction a PC is "facing" while travelling --- by setting it
 		: based on the orientation of the exit used to enter the room --- and
