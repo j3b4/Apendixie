@@ -52,9 +52,9 @@ class Character(DefaultCharacter):
         if "unfinished" in self.location.tags.all():
             self.msg("This room is unfinished!")
             if "afterdoor" in self.location.tags.all():
-                self.msg("Run table II.b")
+                self.execute_cmd("testmenu")
             else:
-                self.msg("Run table I")
+                self.execute_cmd("testmenu")
 
     def update_journal(self):
         """

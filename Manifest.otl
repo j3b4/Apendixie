@@ -1,24 +1,24 @@
 Appendixie
 TODO Actions
-	[_] 8% Automagic:
-		[_] 16% Triggering the builder
+	[_] 33% Automagic:
+		[_] 66% Triggering the builder
 			: The builder is a script maybe? I dont know.
-			[_] 50% evmenu time
+			[X] 100% evmenu time
 				[X] learn menus - create test menu that talkes about building
 					: just write a menu module in the World folder for now
-				[_] learn better
-			[_] make something happen when a PC walks into a random node
+			[X] make something happen when a PC walks into a random node
 				: entering a room with the new node tag will cause the PC to
 				: enter the menu
-				[_] trigger a menu
+				[X] trigger a menu
 					: BASED ON THE TYPE OF ROOM.
+					[X] testmenu fires when entering an unfinished 
 				[X] unfinished rooms typeclass tag	
 					[X] modify the default character
 						: so that a PC checks every room it enters to detect
 						: an "unfinished room"
 			[_] teach test menu to roll on the tables
 				: figure this out
-				: sigh
+				This is out of control
 		[_] Auto-build prompt
 			: When showing the suggested command, prompt the player to accept
 			: the suggestion, implementing it

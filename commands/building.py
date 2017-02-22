@@ -41,6 +41,7 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
     Switches:
       oneway - do not create an exit back to the current location
       door - Creates a Simple Door exit
+      room - forces a real 10x10 room on the other side of the door
 
     Example:
       @tunnel n
@@ -132,6 +133,8 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
             backstring = ", %s;%s" % (backname, backshort)
             if "door" in self.switches:
                 backstring = "%s:%s" % (backstring, doorclass)
+        if "room" in self.switches:
+            roomname = "new 10x10 room"
 
         if self.rhs:
             roomname = self.rhs  # this may include aliases; that's fine.
@@ -150,6 +153,8 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
         else:
             new_room.tags.add("unfinished")
             new_room.tags.add("inpasage")
+        if "room" in self.switches:
+            new_room.tags.add("room10")
 
         # report to builder
         room_string = "Created room %s(%s)" % (new_room, new_room.dbref)
