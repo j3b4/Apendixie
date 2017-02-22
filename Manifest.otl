@@ -1,7 +1,7 @@
 Appendixie
 TODO Actions
-	[_] 33% Automagic:
-		[_] 66% Triggering the builder
+	[_] 25% Automagic:
+		[_] 50% Triggering the builder
 			: The builder is a script maybe? I dont know.
 			[X] 100% evmenu time
 				[X] learn menus - create test menu that talkes about building
@@ -16,6 +16,8 @@ TODO Actions
 					[X] modify the default character
 						: so that a PC checks every room it enters to detect
 						: an "unfinished room"
+			[_] Learn about menus by implementing the NPC shop Tutorial
+				: type it all in
 			[_] teach test menu to roll on the tables
 				: figure this out
 				This is out of control
