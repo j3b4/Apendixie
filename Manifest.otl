@@ -18,6 +18,11 @@ TODO Actions
 						: an "unfinished room"
 			[X] Learn about menus by implementing the NPC shop Tutorial
 				: type it all in
+			[_] teach @tun & door to use relative directions
+				: sounds hard but I don't think.  Just need the PC to have
+				: their .db.direction value set.
+				[_] check if PC has dirction
+				[_] if yes run a translation
 			[_] teach test menu to roll on the tables
 				: figure this out
 		[_] Auto-build prompt
