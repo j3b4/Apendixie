@@ -1,7 +1,7 @@
 Appendixie
 TODO Actions
-	[_] 37% Automagic:
-		[_] 75% Triggering the builder
+	[_] 52% Automagic:
+		[_] 80% Triggering the builder
 			: The builder is a script maybe? I dont know.
 			[X] 100% evmenu time
 				[X] learn menus - create test menu that talkes about building
@@ -18,18 +18,28 @@ TODO Actions
 						: an "unfinished room"
 			[X] Learn about menus by implementing the NPC shop Tutorial
 				: type it all in
-			[_] teach @tun & door to use relative directions
+			[X] teach @tun & door to use relative directions
 				: sounds hard but I don't think.  Just need the PC to have
 				: their .db.direction value set.
-				[_] check if PC has dirction
-				[_] if yes run a translation
+				[X] check if PC has dirction
+				[X] if yes run a translation
 			[_] teach test menu to roll on the tables
 				: figure this out
-		[_] Auto-build prompt
+		[_] 25% Auto-build prompt
 			: When showing the suggested command, prompt the player to accept
 			: the suggestion, implementing it
-			: immediately.commands.default.muxcommand.MuxCommand. 
-	[_] 54% Relative directions
+			: immediately
+			[_] 0% On enter 'unfinished passage'
+				[_] roll table - display result
+				[_] menu - accept or over ride
+					[_] [s] submit to fates edict
+						[_] @caller.execute_cmd(@tun or @create)
+					[_] [f] flout fickle fortune (at your peril) 
+						[_] open menu
+			[_] 50% start by moving the roll table method to world.tables
+				[X] chance table to dictionary
+				[_] finish method
+	[_] 69% Relative directions
 		: this terrible idea requires me to write code that on one hand tracks
 		: the direction a PC is "facing" while travelling --- by setting it
 		: based on the orientation of the exit used to enter the room --- and
@@ -59,12 +69,11 @@ TODO Actions
 		[_] Add a compass object.
 			: possession of which causes the players current direction to
 			: display at every "look" return
-		[_] Building commands
+		[X] Building commands
 			translate table results into fixed directions
 				: now that I've proved I can do this. I'm still reconsidering
 				: whether I want to include this function in the autobuild
 				: commands anyways.
-				: probably time to quit this silliness anyways.
 		Direction Translation
 			: each exit has a direction  and upon passing through - the player
 			: is aligned that way.  Then left, right, fwd and behind ... are

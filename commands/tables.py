@@ -6,7 +6,7 @@ A tables from the AD&D DMG.
 # from evennia import Command as BaseCommand
 from commands.command import MuxCommand
 # from evennia.commands.default.muxcommand import MuxCommand as MuxCommand
-from world.tables import TABLES as tableset
+from world.tables import xTABLE as tableset  # to be deprecated
 from random import randint
 from textwrap import dedent
 
