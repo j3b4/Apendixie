@@ -18,6 +18,7 @@ from evennia.utils.utils import class_from_module
 # from evennia.utils.spawner import spawn
 # from evennia.utils.ansi import raw
 # from evennia.commands.default.building import ObjManipCommand
+from world.directions import turn  # for translating relative directions
 
 COMMAND_DEFAULT_CLASS = class_from_module(settings.COMMAND_DEFAULT_CLASS)
 
@@ -33,7 +34,7 @@ COMMAND_DEFAULT_CLASS = class_from_module(settings.COMMAND_DEFAULT_CLASS)
 
 class CmdTunnel(COMMAND_DEFAULT_CLASS):
     """
-    create new rooms in cardinal directions only
+    create new rooms in ordinal directions only
 
     Usage:
       @tunnel[/switch] <direction> [= roomname[;alias;alias;...][:typeclass]]
@@ -49,8 +50,13 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
 
     This is a simple way to build using pre-defined directions:
      |wn,ne,e,se,s,sw,w,nw|n (north, northeast etc)
-     |wu,d|n (up and down)
-     |wi,o|n (in and out)
+     also relative directions:
+     |f - forward, b - backward, r - right, l- left
+     |fr - forward right, fl - forward left etc.
+
+    Relative directions will be translated in to real directions and then
+    built.
+
     The full names (north, in, southwest, etc) will always be put as
     main name for the exit, using the abbreviation as an alias (so an
     exit will always be able to be used with both "north" as well as
@@ -73,12 +79,9 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
                   "sw": ("southwest", "ne"),
                   "w": ("west", "e"),
                   "nw": ("northwest", "se"),
-                  # "u": ("up", "d"),
-                  # "d": ("down", "u"),
-                  # "i": ("in", "o"),
-                  # "o": ("out", "i")
                   # Don't want to use @tun for level changes etc.
                   }
+    relative = ["f", "fr", "r", "br", "b", "bl", "l", "fl"]
 
     new_room_lockstring = "control:id({id}) or perm(Wizards); " \
                           "delete:id({id}) or perm(Wizards); " \
@@ -95,14 +98,33 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
                       "[= roomname[;alias;alias;...][:typeclass]]")
             self.caller.msg(string)
             return
-        if self.lhs not in self.directions:
+        if self.lhs not in self.directions and self.lhs not in self.relative:
             string = ("@tunnel can only understand the following directions:"
                       "%s.") % ",".join(sorted(self.directions.keys()))
-            string += "\n(use @dig for more freedom)"
+            string += string.join(sorted.self.relative)
+            string += "\n(see help @tunnel for more information)"
             self.caller.msg(string)
             return
+
+        if self.lhs in self.relative:
+            message = "relative direction processing"
+            print message
+            caller.msg(message)
+            if not self.caller.db.direction:
+                caller.msg("You have no fixed direction")
+                return
+            else:
+                face = caller.db.direction
+
+            caller.msg("You are facing %s" % face)
+            # translate the direcion
+            # def turn(face, move):
+            direction = turn(face, self.lhs)
+        else:
+            direction = self.lhs
+
         # retrieve all input and parse it
-        exitshort = self.lhs
+        exitshort = direction
         exitname, backshort = self.directions[exitshort]
         backname = self.directions[backshort][0]
 
