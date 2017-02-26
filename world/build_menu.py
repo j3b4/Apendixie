@@ -1,36 +1,36 @@
 "Builder Menu"
 
 from evennia.utils.evmenu import EvMenu
-from commands.command import Command
-
+from commands.command import MuxCommand
+from tables import GYGAX, rolltable
 
 def new_room(caller):
     text = \
         """
-        You're on a new node. You need to
-        run the random room generator!
+        You entered an unfinished node. And rolled on 
         """
-    options = ({"desc": "Start in a passageway",
+    options = ({"desc": "Accept Fate",
                 "goto": "roll_passage"},
                {"desc": "Start in a room or chamber",
                 "goto": "roll_chamber"})
     return text, options
 
 
-class CmdTestMenu(Command):
+class Cmd(MuxCommand):
     """
-    Test menu
+    Build command
 
-    usage test menu <menumodule>
+    This is automatically called when you enter an unfinished node.
+
     """
-    key = "testmenu"
+    key = "@build"
 
     def func(self):
         '''
-        if not self.args:
-            self.caller.msg("Usage: testmenu menumodule")
-            return
         '''
+
+        results = rolltable(GYGAX, "I")  # rolls only on the periodic table.
+
         # Start Menu
         EvMenu(self.caller, "world.build_menu",
                startnode="new_room",

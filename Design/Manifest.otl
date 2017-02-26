@@ -1,6 +1,6 @@
 Appendixie
 TODO Actions
-	[_] 52% Automagic:
+	[_] 65% Automagic:
 		[_] 80% Triggering the builder
 			: The builder is a script maybe? I dont know.
 			[X] 100% evmenu time
@@ -25,7 +25,7 @@ TODO Actions
 				[X] if yes run a translation
 			[_] teach test menu to roll on the tables
 				: figure this out
-		[_] 25% Auto-build prompt
+		[_] 50% Auto-build prompt
 			: When showing the suggested command, prompt the player to accept
 			: the suggestion, implementing it
 			: immediately
@@ -36,9 +36,9 @@ TODO Actions
 						[_] @caller.execute_cmd(@tun or @create)
 					[_] [f] flout fickle fortune (at your peril) 
 						[_] open menu
-			[_] 50% start by moving the roll table method to world.tables
+			[X] 100% start by moving the roll table method to world.tables
 				[X] chance table to dictionary
-				[_] finish method
+				[X] finish method
 	[_] 69% Relative directions
 		: this terrible idea requires me to write code that on one hand tracks
 		: the direction a PC is "facing" while travelling --- by setting it
