@@ -485,24 +485,14 @@ xTABLE = [  # APPENDIX_A  # used by old "table" command deprecated
 ]  # END OF THE TABLE OF TABLES AKA APPENDIX A
 
 GYGAX = {  # APPENDIX_A
-    # TODO: CHANGE THIS TO A DICTIONARY!
-    "I": ["PERIODIC CHECK", 20, [
-        (1, 2, "Continue Straight",
+    "I": ["PERIODIC CHECK", 20, [  # table name, die size
+        (1, 2, "Continue Straight",  # low, high dice, result
             """
             -- check again in 60' (this table)""",
-            """
-            {gBuilder Notes:{nTry {w@name{n 'ing this room "passageway" then
-            try {w@tunnel{n the direction you're going and name the next room
-            "passageway as well. From that room {w@tunnel{n blindly into the
-            next room and re-roll from there."""),
+            "@tun f"),  # build command
         (3, 5, "Door",
             """
-            (see Table II.) <roll on Table II.a first, then II.b>"""
-            """
-            {gBuilder Notes:{nOnce you figure out the doors location, use the
-            {w@door{n command to place a door in the appropriate direction.
-            By default the door is open, go through it and roll on II.b to find
-            out what's there."""),
+            (see Table II.) <roll on Table II.a first, then II.b>"""),
         (6, 10, "Side Passage",
             """
             (see Table III.) -- check again in 30'
@@ -956,7 +946,7 @@ GYGAX = {  # APPENDIX_A
 }  # END OF THE DICTIONARY of TABLES AKA APPENDIX A
 
 
-def rolltable(table_set, table_no):
+def rolltable(table_set, table_no, overide=None):
     """
     This accepts an argument for tableset and for table. Currently there is
     only one tableset called "GYGAX" since it is based on GARY GYGAXs tables
@@ -969,13 +959,30 @@ def rolltable(table_set, table_no):
     """
     # confirm table exists
     if table_no not in table_set.keys():
-        print "%s does not exist in GYGAX" % table_no
+        print "ERROR: %s does not exist in GYGAX" % table_no
         return
 
     # diesize
     table = table_set[table_no]  # a simple list right?
     # the list contains table_name, diesize, results
-    print "You chose %s" % table[0]  # the table_name
-    # roll = randint(1, die_size)
+    # print "die size = %s" % table[1]  # testing
+    if overide:
+        roll = int(overide)
+    else:
+        die_size = table[1]
+        roll = randint(1, die_size)
 
-    return
+    name = ""
+    desc = ""
+    build = ""
+
+    for n in table[2]:
+        if n[0] <= roll and n[1] >= roll:
+            name = n[2]
+            if len(n) >= 4:
+                desc = dedent(n[3])
+            if len(n) == 5:
+                build = dedent(n[4])
+            break
+    results = (name, desc, build)
+    return results
