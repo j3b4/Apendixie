@@ -22,29 +22,31 @@ def menunode_start(caller):
 
     options = ({"key": ("A", "a"),
                 "desc": "Accept Destiny's Edict",
-                "exec": _build_it,
+                "exec": lambda caller:
+                        caller.execute_cmd("@name here = Autobuiltroom"),
                 "goto": "menunode_end"},
                {"key": ("F", "f"),
                 "desc": "Flout fickle Fortune",
                 "goto": "menunode_table_I"},
                {"key": ("C", "c"),
                 "desc": "Cancel and move back",
-                "exec": _cancel_it})
+                "exec": lambda caller:
+                        caller.execute_cmd("move back")})
     return text, options
 
 
 def _cancel_it(caller, raw_string):
     text = "You tried to cancel and moved back"
-    caller.execute_cmd("move back")
+    caller.execute_cmd("eat toast")
     caller.msg(text)
-    return menunode_end
+    # return menunode_end
 
 
 def _build_it(caller, raw_string):
     text = "This would build something"
-    caller.execute_cmd("@name here = Autobuilt room")
+    caller.execute_cmd("howdy fok")
     caller.msg(text)
-    return menunode_end
+    # return menunode_end
 
 
 def menunode_end(caller):
