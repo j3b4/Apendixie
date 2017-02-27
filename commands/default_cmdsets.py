@@ -21,7 +21,7 @@ from tables import CmdTable
 from building import CmdTunnel
 from journal import CmdUpdateJournal, CmdReadJournal
 from movement import CmdMove
-from world.build_menu import CmdTestMenu
+from world.build_menu import CmdAutoBuild
 from typeclasses.npcshop import CmdBuildShop
 
 
@@ -48,8 +48,8 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(CmdUpdateJournal())
         self.add(CmdReadJournal())
         self.add(CmdMove())
-        self.add(CmdTestMenu())
         self.add(CmdBuildShop())
+        self.add(CmdAutoBuild())
 
 
 class PlayerCmdSet(default_cmds.PlayerCmdSet):

@@ -4,47 +4,93 @@ from evennia.utils.evmenu import EvMenu
 from commands.command import MuxCommand
 from tables import GYGAX, rolltable
 
-def new_room(caller):
+
+def menunode_start(caller):
+    (name, desc, build) = rolltable(GYGAX, "I")
+    # rolls only on the periodic table.
     text = \
         """
-        You entered an unfinished node. And rolled on 
+        You entered an unfinished node. And rolled on table I
+        "Periodic Check".
         """
-    options = ({"desc": "Accept Fate",
-                "goto": "roll_passage"},
-               {"desc": "Start in a room or chamber",
-                "goto": "roll_chamber"})
+    text += "\nYou rolled: %s" % name
+    text += "\n %s" % desc
+    text += \
+        """
+        -----
+        """
+
+    options = ({"key": ("A", "a"),
+                "desc": "Accept Destiny's Edict",
+                "exec": _build_it,
+                "goto": "menunode_end"},
+               {"key": ("F", "f"),
+                "desc": "Flout fickle Fortune",
+                "goto": "menunode_table_I"},
+               {"key": ("C", "c"),
+                "desc": "Cancel and move back",
+                "exec": _cancel_it})
     return text, options
 
 
-class Cmd(MuxCommand):
+def _cancel_it(caller, raw_string):
+    text = "You tried to cancel and moved back"
+    caller.execute_cmd("move back")
+    caller.msg(text)
+    return menunode_end
+
+
+def _build_it(caller, raw_string):
+    text = "This would build something"
+    caller.execute_cmd("@name here = Autobuilt room")
+    caller.msg(text)
+    return menunode_end
+
+
+def menunode_end(caller):
+    "End of the menu"
+    text = "You have finished here"
+    return text, None
+
+
+def continue_straight(caller):
+    pass
+
+
+def build_chamber(caller):
+    pass
+
+
+def menunode_table_I(caller):
+    "Display table_I"
+    # TODO make this work for all tables
+    text = "A menu of all options on Table I"
+    options = ({"key": "Continue straight",
+                "goto": continue_straight},
+               {"key": "Chamber",
+                "goto": build_chamber})
+
+    return text, options
+
+
+class CmdAutoBuild(MuxCommand):
     """
-    Build command
+    Automatic Build command
 
     This is automatically called when you enter an unfinished node.
 
     """
-    key = "@build"
+    key = "@autobuild"
 
     def func(self):
         '''
         '''
 
-        results = rolltable(GYGAX, "I")  # rolls only on the periodic table.
-
         # Start Menu
         EvMenu(self.caller, "world.build_menu",
-               startnode="new_room",
+               startnode="menunode_start",
                cmdset_mergetype="Replace", cmdset_priority=1,
                auto_quit=True, auto_look=True, auto_help=True,
                cmd_on_exit="look",
                persistent=False,
                )
-
-
-"""
-nothing = EvMenu()
-
-print nothing
-
-return
-"""
