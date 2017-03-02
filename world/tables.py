@@ -492,11 +492,19 @@ GYGAX = {  # APPENDIX_A
             "@tun f"),  # build command
         (3, 5, "Door",
             """
-            (see Table II.) <roll on Table II.a first, then II.b>"""),
+            (see Table II.) <roll on Table II.a first, then II.b>""",
+            """
+            # no batch commands
+            # on this table
+            """),
         (6, 10, "Side Passage",
             """
             (see Table III.) -- check again in 30'
-            (this table)"""),
+            (this table)""",
+            """
+            # batch commands
+            @tunnel f
+            """),
         (11, 13, "Passage Turns",
             """
             (see Table IV., check width on Table III.)
@@ -522,8 +530,14 @@ GYGAX = {  # APPENDIX_A
             so direction of monster's approach can be determined."""),
         ]],
     "II.a": ["LOCATION OF DOOR", 20, [
-        (1, 6, "Left", "<door is on left side of passage>"),
-        (7, 12, "Right", "<door is on right side of passage>"),
+        (1, 6, "Left", "<door is on left side of passage>",
+            """# batch commands
+            @door l
+            """),
+        (7, 12, "Right", "<door is on right side of passage>",
+            """
+            @door r
+            """),
         (13, 20, "Ahead", "<passage comed to and end at this door>"),
         ]],
     "II.b": ["SPACE BEYOND DOOR", 20, [

@@ -3,10 +3,11 @@
 from evennia.utils.evmenu import EvMenu
 from commands.command import MuxCommand
 from tables import GYGAX, rolltable
+# from evennia import search_object
 
 
 def menunode_start(caller):
-    (name, desc, build) = rolltable(GYGAX, "I")
+    (name, desc, build_cmd) = rolltable(GYGAX, "I")
     # rolls only on the periodic table.
     text = \
         """
@@ -17,41 +18,41 @@ def menunode_start(caller):
     text += "\n %s" % desc
     text += \
         """
-        -----
+        That suggest you will use this command:
+
         """
+    text += build_cmd
+    build_cmd = "@tun_f"
 
     options = ({"key": ("A", "a"),
                 "desc": "Accept Destiny's Edict",
-                "exec": lambda caller:
-                        caller.execute_cmd("@name here = Autobuiltroom"),
+                "exec": _build_it(caller, build_cmd),
                 "goto": "menunode_end"},
                {"key": ("F", "f"),
                 "desc": "Flout fickle Fortune",
                 "goto": "menunode_table_I"},
                {"key": ("C", "c"),
                 "desc": "Cancel and move back",
-                "exec": lambda caller:
-                        caller.execute_cmd("move back")})
+                "exec": _cancel_it})
     return text, options
 
 
-def _cancel_it(caller, raw_string):
+def _cancel_it(caller):
     text = "You tried to cancel and moved back"
-    caller.execute_cmd("eat toast")
+    caller.execute_cmd("say I say I say")
     caller.msg(text)
     # return menunode_end
 
 
-def _build_it(caller, raw_string):
-    text = "This would build something"
-    caller.execute_cmd("howdy fok")
-    caller.msg(text)
-    # return menunode_end
+def _build_it(caller, build_cmd=None):
+    caller.execute_cmd("@name here = Autobuilt room")
+    default_desc = "This room built by AUTOBUILDER(TM)"
+    caller.execute_cmd("@desc here = %s" % default_desc)
 
 
 def menunode_end(caller):
     "End of the menu"
-    text = "You have finished here"
+    text = "Reached End Node"
     return text, None
 
 
@@ -91,7 +92,7 @@ class CmdAutoBuild(MuxCommand):
         # Start Menu
         EvMenu(self.caller, "world.build_menu",
                startnode="menunode_start",
-               cmdset_mergetype="Replace", cmdset_priority=1,
+               cmdset_mergetype="Union", cmdset_priority=1,
                auto_quit=True, auto_look=True, auto_help=True,
                cmd_on_exit="look",
                persistent=False,

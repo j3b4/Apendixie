@@ -48,13 +48,13 @@ class Character(DefaultCharacter):
 
         """
         Also check for rooms with the unfinished tag
-        """
         if "unfinished" in self.location.tags.all():
             self.msg("This room is unfinished!")
             if "afterdoor" in self.location.tags.all():
                 self.execute_cmd("@autobuild")
             else:
                 self.execute_cmd("@autobuild")
+        """
 
     def update_journal(self):
         """
