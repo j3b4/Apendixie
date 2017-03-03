@@ -488,23 +488,19 @@ GYGAX = {  # APPENDIX_A
     "I": ["PERIODIC CHECK", 20, [  # table name, die size
         (1, 2, "Continue Straight",  # low, high dice, result
             """
-            -- check again in 60' (this table)""",
-            "@tun f"),  # build command
+            -- check again in 60' (this table)""",  # desc
+            ["@tun f", "@name here = Straight Passage"]),  # build list
         (3, 5, "Door",
             """
             (see Table II.) <roll on Table II.a first, then II.b>""",
-            """
-            # no batch commands
-            # on this table
-            """),
+            ["@autobuild II",  # build list
+                "@autobuild II.b"]),
         (6, 10, "Side Passage",
             """
             (see Table III.) -- check again in 30'
             (this table)""",
-            """
-            # batch commands
-            @tunnel f
-            """),
+            ["@tunnel f",
+                "@autobuild III"]),
         (11, 13, "Passage Turns",
             """
             (see Table IV., check width on Table III.)
@@ -972,14 +968,8 @@ def rolltable(table_set, table_no, overide=None):
 
     """
     # confirm table exists
-    if table_no not in table_set.keys():
-        print "ERROR: %s does not exist in GYGAX" % table_no
-        return
+    table = gettable(table_set, table_no)
 
-    # diesize
-    table = table_set[table_no]  # a simple list right?
-    # the list contains table_name, diesize, results
-    # print "die size = %s" % table[1]  # testing
     if overide:
         roll = int(overide)
     else:
@@ -998,7 +988,18 @@ def rolltable(table_set, table_no, overide=None):
             if len(n) == 5:
                 build = dedent(n[4])
             break
-    results = (name, desc, build)
+    results = (roll, name, desc, build)
     return results
 
+
+def gettable(table_set, table_no):
+    """
+    This looks up a table and returns it to the caller
+    """
+    # confirm table exists
+    if table_no not in table_set.keys():
+        print "ERROR: %s does not exist in %s" % table_no, table_set.name
+        return
+
+    return table_set[table_no]
 # end
