@@ -1,16 +1,16 @@
 Appendixie
 TODO Actions
-	[_] 87% Automagic:
-		[_] 75% Auto-build prompt
+	[_] 66% Automagic:
+		[_] 33% Auto-build prompt
 			: When showing the suggested command, prompt the player to accept
 			: the suggestion, implementing it
 			: immediately
-			[_] % idea: try tweak autobuild command
+			[_] 0% idea: try tweak autobuild command
 				[_] to take args
-					[_] to start on particular table
+					[X] to start on particular table
 					[_] and over ride result if nec
-			[_] 50% On enter 'unfinished passage'
-				[X] roll table - display result
+			[_] 0% On enter 'unfinished passage'
+				[_] roll table - display result
 				[_] menu - accept or over ride
 					[_] [s] submit to fates edict
 						[_] caller.execute_cmd(@tun or @create)
@@ -26,6 +26,11 @@ TODO Actions
 					[_] Figure out how to navigate the table tree
 						: where is the logic stored?
 						: yet another optinonal column in the table?
+						YES
+							use @autobuild I 
+							: this table override lets you re-run the menu
+							: starting on a particular table section 
+							: Kind of amazing IMHO
 			[X] 100% start by moving the roll table method to world.tables
 				[X] chance table to dictionary
 				[X] finish method
