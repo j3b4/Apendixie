@@ -9,8 +9,6 @@ from textwrap import dedent
 # mismatch with the actual length of the table list.  Avoiding this would
 # require some sort of a check.
 
-# TODO: Appending "builder" hints to to the table results.
-# belay that!
 # TODO: add in builder commands to the table results, replacing the hints.
 
 xTABLE = [  # APPENDIX_A  # used by old "table" command deprecated
@@ -485,7 +483,7 @@ xTABLE = [  # APPENDIX_A  # used by old "table" command deprecated
 ]  # END OF THE TABLE OF TABLES AKA APPENDIX A
 
 GYGAX = {  # APPENDIX_A
-    "I": ["PERIODIC CHECK", 20, [  # table name, die size
+    "I": ["PERIODIC CHECK", 20, [  # build ready
         (1, 2, "Continue Straight",  # low, high dice, result
             """
             -- check again in 60' (this table)""",  # desc
@@ -493,14 +491,12 @@ GYGAX = {  # APPENDIX_A
         (3, 5, "Door",
             """
             (see Table II.) <roll on Table II.a first, then II.b>""",
-            ["@autobuild II",  # build list
-                "@autobuild II.b"]),
+            ["@autobuild II.a"]),  # build list
         (6, 10, "Side Passage",
             """
             (see Table III.) -- check again in 30'
             (this table)""",
-            ["@tunnel f",  # build list
-                "@autobuild III"]),
+            ["@autobuild III"]),
         (11, 13, "Passage Turns",
             """
             (see Table IV., check width on Table III.)
@@ -532,7 +528,7 @@ GYGAX = {  # APPENDIX_A
             ["@create/drop Monster",
                 "@autobuild I"]),
         ]],
-    "II.a": ["LOCATION OF DOOR", 20, [
+    "II.a": ["LOCATION OF DOOR", 20, [  # build ready
         (1, 6, "Left", "<door is on left side of passage>",
             ["@door l",
                 "@tunnel f"]),
@@ -542,7 +538,7 @@ GYGAX = {  # APPENDIX_A
         (13, 20, "Ahead", "<passage comed to an end at this door>",
             ["@door f"]),
         ]],
-    "II.b": ["SPACE BEYOND DOOR", 20, [
+    "II.b": ["SPACE BEYOND DOOR", 20, [  # TODO
         (1, 4, "Parallel passage**",
             """or 10' x 10' room if door is straight ahead."""),
         (5, 8, "Passage straight ahead"),
@@ -559,25 +555,26 @@ GYGAX = {  # APPENDIX_A
         (11, 18, "Room", "(Go to Table V.ro)"),
         (19, 20, "Chamber", "(Go to Table V.chamber)"),
         ]],
-    "III": ["SIDE PASSAGES", 20, [
+    "III": ["SIDE PASSAGES", 20, [  # build ready
         (1, 2, "Side Passage", "left 90 degrees",
-            ["@tunnel f", "@tunnel l"],),
+            ["@tunnel f", "@tunnel l = dif passage"],),
         (3, 4, "Side Passage", "right 90 degrees",
-            ["@tunnel f", "@tunnel r"],),
+            ["@tunnel f", "@tunnel r = dif passage"],),
         (5, 5, "Side Passage", "left 45 degrees ahead",
-            ["@tunnel f", "@tunnel fl"],),
+            ["@tunnel f", "@tunnel fl = dif passage"],),
         (6, 6, "Side Passage", "right 45 degrees ahead",
-            ["@tunnel f", "@tunnel fr"],),
+            ["@tunnel f", "@tunnel fr = dif passage"],),
         (7, 7, "Side Passage", "left 45 degrees behind (left 135 degrees)",
-            ["@tunnel f", "@tunnel bl"],),
+            ["@tunnel f", "@tunnel bl = dif passage"],),
         (8, 8, "Side Passage", "right 45 degrees behind (right 135 degrees)",
-            ["@tunnel f", "@tunnel br"],),
+            ["@tunnel f", "@tunnel br = dif passage"],),
         (9, 9, "Curving Side Passage", "left curve 45 degrees ahead",
-            ["@tunnel f", "@tunnel fl"],),
+            ["@tunnel f", "@tunnel fl = dif passage"],),
         (10, 10, "Curving Side Passage", "right curve 45 degrees ahead",
-            ["@tunnel f", "@tunnel fr"],),
+            ["@tunnel f", "@tunnel fr = dif passage"],),
         (11, 13, "Junction", "passage 'T's",
-            ["@tunnel l", "@tunnel r", "@name here = T intersection"],),
+            ["@tunnel l = dif passage", "@tunnel r = dif passage",
+                "@name here = T intersection"],),
         (14, 15, "Junction", "passage 'Y's",
             ["@tunnel f", "@tunnel fl", "@tunnel fr",
                 "@name here = Y Intersection"],),
@@ -588,14 +585,20 @@ GYGAX = {  # APPENDIX_A
             ["@tunnel fl", "@tunnel fr", "@tunnel bl", "@tunnel br",
                 "@name here = Five way junction"],),
         ]],
-    "III.A": ["PASSAGE WIDTH", 20, [
-        (1, 12, "10'"),
-        (13, 16, "20'"),
-        (17, 17, "30'"),
-        (18, 18, "5'"),
-        (19, 20, "SPECIAL PASSAGE", "TABLE III.B"),
+    "III.A": ["PASSAGE WIDTH", 20, [  # hold
+        # The idea is only call this upon entering a room named "dif passage"
+        (1, 12, "10'", "new passage width",
+            ["@desc = 10' wide passage"]),
+        (13, 16, "20'", "new passage width",
+            ["@desc = 20' wide passage"]),
+        (17, 17, "30'", "new passage width",
+            ["@desc = 30' wide passage"]),
+        (18, 18, "5'", "new passage width",
+            ["@desc = 5' wide passage"]),
+        (19, 20, "SPECIAL PASSAGE", "TABLE III.B",
+            ["@autobuild III.B"]),
         ]],
-    "III.B": ["SPECIAL PASSAGE", 20, [
+    "III.B": ["SPECIAL PASSAGE", 20, [  # hold
         (1, 4, "40', columns down center"),
         (5, 7, "40', double row of columns"),
         (8, 10, "50', double row of columns"),
@@ -610,13 +613,25 @@ GYGAX = {  # APPENDIX_A
             """ Streams bisect the passage. They will be bridged 75%(1-15) of
             the time and be an obstacle 25% (16-20) of the time."""),
         ]],
-    "IV": ["TURNS", 20, [
-        (1, 8, "left 90 degrees"),
-        (9, 9, "left 45 degrees ahead"),
-        (10, 10, "left 45 degrees behind", "(left 135 degrees)"),
-        (11, 18, "right 90 degrees"),
-        (19, 19, "right 45 degrees ahead"),
-        (20, 20, "right 45 degrees behind", "(right 135 degrees)"),
+    "IV": ["TURNS", 20, [  # build ready
+        (1, 8, "left 90 degrees", "turn",
+            ["@tunnel l",
+                "@name here = Sharp Turn"]),
+        (9, 9, "left 45 degrees ahead", "turn",
+            ["@tunnel fl",
+                "@name here = Slight Turn"]),
+        (10, 10, "left 45 degrees behind", "(left 135 degrees)",
+            ["@tunnel bl",
+                "@name here = Hairpin Turn"]),
+        (11, 18, "right 90 degrees", "turn",
+            ["@tunnel l",
+                "@name here = Sharp Turn"]),
+        (19, 19, "right 45 degrees ahead", "turn",
+            ["@tunnel r",
+                "@name here = Slight Turn"]),
+        (20, 20, "right 45 degrees behind", "(right 135 degrees)",
+            ["@tunnel br",
+                "@name here = Hairpin Turn"]),
         ]],
     "V.ch": ["CHAMBERS", 20, [
         (1, 2, "Square, 20' x 20'", "description",
@@ -648,7 +663,7 @@ GYGAX = {  # APPENDIX_A
             See subtables: V.A and V.B""",
             ["@autobuild V.A"]),
         ]],
-    "V.ro": ["ROOM", 20, [  # hope to deprecate this table soon
+    "V.ro": ["ROOM", 20, [  # hold - hope to deprecate this table soon
         (1, 2, "Square, 10' x 10'"),
         (3, 4, "Square, 20' x 20'"),
         (5, 6, "Square, 30' x 30'"),
@@ -705,19 +720,34 @@ GYGAX = {  # APPENDIX_A
         ]],
     "V.C": ["NUMBER <<and type>> OF EXITS", 20, [
         # Appendix A, TABLE V.C too tedious. This is a simplified version.
-        (1, 4, "1 Door", "placement"),
-        (5, 8, "1 Passage"),
-        (9, 11, "2 Doors"),
-        (11, 13, "1 Door, 1 Passage"),
-        (14, 16, "2 Doors, 1 Passage"),
-        (17, 18, "3 Doors"),
-        (19, 19, "3 Doors, 1 Passage"),
-        (20, 20, "0 Doors",
+        (1, 1, "1 Door", "placement ahead", ["@door f"]),
+        (2, 2, "1 Door", "placement right", ["@door f"]),
+        (3, 3, "1 Door", "placement left", ["@door f"]),
+        (5, 5, "1 Passage", "placement ahead", ["@tunnel f"]),
+        (6, 6, "1 Passage", "placement right", ["@tunnel r"]),
+        (7, 7, "1 Passage", "placement left", ["@tunnel l"]),
+        (9, 9, "2 Doors", "placed left and right",
+            ["@door r", "@door l"]),
+        (10, 10, "2 Doors", "placed forward and right",
+            ["@door r", "@door f"]),
+        (11, 11, "2 Doors", "placed forward and left",
+            ["@door l", "@door f"]),
+        (12, 12, "1 Door, 1 Passage", "passage fwd & door right",
+            ["@tunnel f", "@door r"]),
+        (13, 13, "1 Door, 1 Passage", "passage fwd & door left",
+            ["@tunnel f", "@door l"]),
+        (14, 16, "2 Doors, 1 Passage", "passage fwd; doors left & right",
+            ["@tunnel f", "@door l", "door r"]),
+        (17, 18, "3 Doors", "on all walls",
+            ["@door r", "@door l", "@door f"]),
+        (19, 20, "0 Doors",
             """
             Check once per 10' for secret doors (see TABLE V.D., footnote)
             <<actually that wont help. So try this instead: Roll again on
             this chart and interpret any "Passage" result as a secret
-            door. You're welcome."""),
+            door. You're welcome.""",
+            ["@desc here = There are no obvious exits besides the one you"
+                "entered from"]),
         ]],
     "V.D": ["EXIT LOCATION", 20, [
         (1, 7, "opposite wall"),
