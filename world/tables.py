@@ -499,42 +499,48 @@ GYGAX = {  # APPENDIX_A
             """
             (see Table III.) -- check again in 30'
             (this table)""",
-            ["@tunnel f",
+            ["@tunnel f",  # build list
                 "@autobuild III"]),
         (11, 13, "Passage Turns",
             """
             (see Table IV., check width on Table III.)
-            check again in 30' (this table)"""),
+            check again in 30' (this table)""",
+            ["@autobuild IV"]),  # build list of one item
         (14, 16, "Chamber",
             """
             (See Table V.ch) -- check 30' after leaving
-            (this table)"""),
-        (17, 17, "Stairs", "(see Table VI.)"),
+            (this table)""",
+            ["@autobuild V.ch"]),  # build list of one
+        (17, 17, "Stairs", "(see Table VI.)", ["@autobuild VI"]),
         (18, 18, "Dead End",
             """
             (walls left, right, and ahead can be checked for Secret
             Doors, see Table V.D., footnote) <<Actually no, that wont work so
             don't bother. It's just a dead end.>>
-            """),
+            """,
+            ["@name here = Dead End"]),
         (19, 19, "Trick/Trap",
             """
             (See Table VII.), passage continues -- check again in
-            30' (this table)"""),
+            30' (this table)""",
+            ["@create/drop Trick",
+                "@autobuild I"]),
         (20, 20, "Wandering Monster",
             """
             -- check again immeditately to see what lies ahead
-            so direction of monster's approach can be determined."""),
+            so direction of monster's approach can be determined.""",
+            ["@create/drop Monster",
+                "@autobuild I"]),
         ]],
     "II.a": ["LOCATION OF DOOR", 20, [
         (1, 6, "Left", "<door is on left side of passage>",
-            """# batch commands
-            @door l
-            """),
+            ["@door l",
+                "@tunnel f"]),
         (7, 12, "Right", "<door is on right side of passage>",
-            """
-            @door r
-            """),
-        (13, 20, "Ahead", "<passage comed to and end at this door>"),
+            ["@door r",
+                "@tunnel f"]),
+        (13, 20, "Ahead", "<passage comed to an end at this door>",
+            ["@door f"]),
         ]],
     "II.b": ["SPACE BEYOND DOOR", 20, [
         (1, 4, "Parallel passage**",
@@ -554,21 +560,33 @@ GYGAX = {  # APPENDIX_A
         (19, 20, "Chamber", "(Go to Table V.chamber)"),
         ]],
     "III": ["SIDE PASSAGES", 20, [
-        (1, 2, "left 90 degrees"),
-        (3, 4, "right 90 degrees"),
-        (5, 5, "left 45 degrees ahead"),
-        (6, 6, "right 45 degrees ahead"),
-        (7, 7, "left 45 degrees behind (left 135 degrees)"),
-        (8, 8, "right 45 degrees behind (right 135 degrees)"),
-        (9, 9, "left curve 45 degrees ahead"),
-        (10, 10, "right curve 45 degrees ahead"),
-        (11, 13, "passage 'T's"),
-        (14, 15, "passage 'Y's"),
-        (16, 19, "four-way intersection"),
-        (20, 20, "passage 'X's",
-            """
-            if present passage is horizontal or vertical it forms a fifth
-            passage into the 'X'."""),
+        (1, 2, "Side Passage", "left 90 degrees",
+            ["@tunnel f", "@tunnel l"],),
+        (3, 4, "Side Passage", "right 90 degrees",
+            ["@tunnel f", "@tunnel r"],),
+        (5, 5, "Side Passage", "left 45 degrees ahead",
+            ["@tunnel f", "@tunnel fl"],),
+        (6, 6, "Side Passage", "right 45 degrees ahead",
+            ["@tunnel f", "@tunnel fr"],),
+        (7, 7, "Side Passage", "left 45 degrees behind (left 135 degrees)",
+            ["@tunnel f", "@tunnel bl"],),
+        (8, 8, "Side Passage", "right 45 degrees behind (right 135 degrees)",
+            ["@tunnel f", "@tunnel br"],),
+        (9, 9, "Curving Side Passage", "left curve 45 degrees ahead",
+            ["@tunnel f", "@tunnel fl"],),
+        (10, 10, "Curving Side Passage", "right curve 45 degrees ahead",
+            ["@tunnel f", "@tunnel fr"],),
+        (11, 13, "Junction", "passage 'T's",
+            ["@tunnel l", "@tunnel r", "@name here = T intersection"],),
+        (14, 15, "Junction", "passage 'Y's",
+            ["@tunnel f", "@tunnel fl", "@tunnel fr",
+                "@name here = Y Intersection"],),
+        (16, 19, "Junction", "four-way intersection",
+            ["@tunnel f", "@tunnel l", "@tunnel r",
+                "@name here = Four way Intersection"],),
+        (20, 20, "Junction", "passage 'X's",
+            ["@tunnel fl", "@tunnel fr", "@tunnel bl", "@tunnel br",
+                "@name here = Five way junction"],),
         ]],
     "III.A": ["PASSAGE WIDTH", 20, [
         (1, 12, "10'"),
@@ -601,19 +619,36 @@ GYGAX = {  # APPENDIX_A
         (20, 20, "right 45 degrees behind", "(right 135 degrees)"),
         ]],
     "V.ch": ["CHAMBERS", 20, [
-        (1, 2, "Square, 20' x 20'"),
-        (3, 4, "Square, 20' x 20'"),
-        (5, 6, "Square, 30' x 30'"),
-        (7, 8, "Square, 40' x 40'"),
-        (9, 10, "Rectangular, 20' x 30'"),
-        (11, 13, "Rectangular, 20' x 30'"),
-        (14, 15, "Rectangular, 30' x 50'"),
-        (16, 17, "Rectangular, 40' x 60'"),
+        (1, 2, "Square, 20' x 20'", "description",
+            ["@name here = 20x20 Chamber",
+                "@autobuild V.C"]),
+        (3, 4, "Square, 20' x 20'", "description",
+            ["@name here = 20x20 Chamber",
+                "@autobuild V.C"]),
+        (5, 6, "Square, 30' x 30'", "description",
+            ["@name here = 20x20 Chamber",
+                "@autobuild V.C"]),
+        (7, 8, "Square, 40' x 40'", "description",
+            ["@name here = 20x20 Chamber",
+                "@autobuild V.C"]),
+        (9, 10, "Rectangular, 20' x 30'", "description",
+            ["@name here = 20x20 Chamber",
+                "@autobuild V.C"]),
+        (11, 13, "Rectangular, 20' x 30'", "description",
+            ["@name here = 20x20 Chamber",
+                "@autobuild V.C"]),
+        (14, 15, "Rectangular, 30' x 50'", "description",
+            ["@name here = 20x20 Chamber",
+                "@autobuild V.C"]),
+        (16, 17, "Rectangular, 40' x 60'", "description",
+            ["@name here = 20x20 Chamber",
+                "@autobuild V.C"]),
         (18, 20, "Unusual shape and size",
             """
-            See subtables: V.A and V.B"""),
+            See subtables: V.A and V.B""",
+            ["@autobuild V.A"]),
         ]],
-    "V.ro": ["ROOM", 20, [
+    "V.ro": ["ROOM", 20, [  # hope to deprecate this table soon
         (1, 2, "Square, 10' x 10'"),
         (3, 4, "Square, 20' x 20'"),
         (5, 6, "Square, 30' x 30'"),
@@ -630,17 +665,31 @@ GYGAX = {  # APPENDIX_A
         (1, 5, "Circular*",
             """
             * 1-5 has pool (See Table VIII.A and  VIII.C if appropriate),
-            6-7 has well, 8-10 has shaft, and 11-20 is normal."""),
-        (6, 8, "Triangular"),
-        (9, 11, "Trapezoidal"),
+            6-7 has well, 8-10 has shaft, and 11-20 is normal.""",
+            ["@name here = Circular Room",
+                "@autobuild V.B"]),
+        (6, 8, "Triangular",
+            ["@name here = Triangular Room",
+                "@autobuild V.B"]),
+        (9, 11, "Trapezoidal",
+            ["@name here = Trapezoidal Room",
+                "@autobuild V.B"]),
         (12, 13, "Odd-Shaped**",
             """
             ** Draw what shape you desire or what will fit the map -- it is a
-            special shape if desired. <<Describe the shape>>"""),
-        (14, 15, "Oval"),
-        (16, 17, "Hexagonal"),
-        (18, 19, "Octagonal"),
-        (20, 20, "Cave")
+            special shape if desired. <<Describe the shape>>""",
+            ["@name here = Odd Shaped Room"]),
+        (14, 15, "Oval",
+            ["@name here = Oval Room",
+                "@autobuild V.B"]),
+        (16, 17, "Hexagonal",
+            ["@name here = Hexagonal Room",
+                "@autobuild V.B"]),
+        (18, 19, "Octagonal",
+            ["@name here = Octoganal Room",
+                "@autobuild V.B"]),
+        (20, 20, "Cave", "Cave type room",
+            ["@autobuild VIII"])
         ]],
     "V.B": ["UNUSUAL SIZE", 20, [
         (1, 3, "about 500 sq. ft."),
@@ -656,7 +705,7 @@ GYGAX = {  # APPENDIX_A
         ]],
     "V.C": ["NUMBER <<and type>> OF EXITS", 20, [
         # Appendix A, TABLE V.C too tedious. This is a simplified version.
-        (1, 4, "1 Door"),
+        (1, 4, "1 Door", "placement"),
         (5, 8, "1 Passage"),
         (9, 11, "2 Doors"),
         (11, 13, "1 Door, 1 Passage"),
@@ -771,40 +820,38 @@ GYGAX = {  # APPENDIX_A
         (16, 20, "In a secret room nearby")
         ]],
     "VI": ["STAIRS", 20, [
-        (1, 5, "Down 1 level*",
+        (1, 8, "Down 1 level*",
+            "Create a random downer",
+            ["@create/drop Stairs Down",
+                "@tunnel f",
+                "@name here = Stairs leading down"]),
+        (9, 10, "Up Stairs", "Create a random upper",
+            ["@create/drop Stairs Up",
+                "@tunnel f",
+                "@name here = Stairs leading up"]),
+        (11, 12, "Chimney up",
             """
-            * 1 in 20 has a door which closes egress for the day."""),
-        (6, 6, "Down 2 levels**",
+            passage continues, check again in 30'""",
+            ["@create/drop Chimney Up",
+                "@tunnel f",
+                "@name here = Stairs leading up"]),
+        (12, 13, "Chimney up",
             """
-            ** 2 in 20 has a door which closes egress for the day."""),
-        (7, 7, "Down 3 levels***",
+            passage continues, check again in 30'""",
+            ["@create/drop Chimney Up",
+                "@tunnel f",
+                "@name here = Stairs leading up"]),
+        (14, 17, "Trap door down",
             """
-            *** 3 in  20 has a door which closes egress for the day."""),
-        (8, 8, "Up 1 level"),
-        (9, 9, "Up dead end",
-            """
-            (1 in 6 chance to chute down 2 levels)"""),
-        (10, 10, "Down dead end",
-            """
-            (1 in 6 chance to chute down 1 level)"""),
-        (11, 11, "Chimney up 1 level",
-            """
-            passage continues, check again in 30'"""),
-        (12, 12, "Chimney up 2 levels",
-            """
-            passage continues, check again in 30'"""),
-        (13, 13, "Chimney down 2 levels",
-            """
-            passage continues, check again in 30'"""),
-        (14, 16, "Trap door down 1 level",
-            """
-            passage continues, check again in 30'"""),
-        (17, 17, "Trap door down 2 levels",
-            """
-            passage continues, check again in 30'"""),
+            passage continues, check again in 30'""",
+            ["@create/drop Trapdoor Down",
+                "@tunnel f",
+                "@name here = Stairs leading up"]),
         (18, 20, "Up 1 then down 2",
             """
-            (total down 1), chamber at end roll on TABLE V.)"""),
+            (total down 1), chamber at end roll on TABLE V.)""",
+            ["@create/drop Stairs Up", "@tunnel f",
+                "@name here = Stairs leading up"]),
         ]],
     "VII": ["TRICK/TRAP", 20, [
         (1, 5, "Secret Door",
@@ -986,7 +1033,7 @@ def rolltable(table_set, table_no, overide=None):
             if len(n) >= 4:
                 desc = dedent(n[3])
             if len(n) == 5:
-                build = dedent(n[4])
+                build = (n[4])
             break
     results = (roll, name, desc, build)
     return results
@@ -998,7 +1045,7 @@ def gettable(table_set, table_no):
     """
     # confirm table exists
     if table_no not in table_set.keys():
-        print "ERROR: %s does not exist in %s" % table_no, table_set.name
+        print "ERROR: %s does not exist in %s" % (table_no, table_set)
         return
 
     return table_set[table_no]

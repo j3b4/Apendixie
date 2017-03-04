@@ -21,7 +21,7 @@ from tables import CmdTable
 from building import CmdTunnel
 from journal import CmdUpdateJournal, CmdReadJournal
 from movement import CmdMove
-from world.build_menu import CmdAutoBuild
+from world.autobuild import CmdAutoBuild
 from typeclasses.npcshop import CmdBuildShop
 
 
