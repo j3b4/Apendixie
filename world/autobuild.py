@@ -6,9 +6,15 @@ from tables import GYGAX, rolltable, gettable
 # TODO: In future, Choose different tablesets, perhaps based on major zone
 # divisions.
 
+MANIFEST = []
+# omg I feel unwell doing this!
+# perhaps should use caller.ndb._menutree.MANIFEST instead?
+
 
 def menunode_start(caller):
     print "\nmenunode_Started\n"
+    print "Manifest: "
+    print MANIFEST
     table = caller.ndb._menutree.table
     override = caller.ndb._menutree.override
     print "table = %s" % table
@@ -18,8 +24,8 @@ def menunode_start(caller):
     dieroll = results[0]
     name = results[1]
     desc = results[2] or None
-    build_cmd = results[3] or None
-    print (dieroll, name, desc, build_cmd)
+    recipe = results[3] or None
+    print (dieroll, name, desc, recipe)
     # table is a string name of a known table
     # override is optional and sets a particular result
     text = "You rolled a %s on table %s " % (dieroll, table)
@@ -27,20 +33,20 @@ def menunode_start(caller):
     text += "\n %s" % desc
     text += "\n Build recipe:\n----------------\n"
     try:
-        text += '\n'.join(build_cmd)
+        text += '\n'.join(recipe)
     except TypeError:
-        report = "Type error in build_cmd"
+        report = "Type error in recipe"
         print report
         caller.msg(report)
     except:
-        report = "Do you even have a build_cmd"
+        report = "Do you even have a recipe"
         print report
         caller.msg(report)
 
     options = ({"key": ("A", "a"),
                 "desc": "Accept Destiny's Edict",
-                "exec": _build_it(caller, build_cmd),
-                "goto": "menunode_end"},
+                "exec": _process(caller, recipe),
+                },
                {"key": ("F", "f"),
                 "desc": "Flout fickle Fortune",
                 "goto": "menunode_table_I"},
@@ -57,24 +63,47 @@ def _cancel_it(caller):
     return menunode_end
 
 
-def _build_it(caller, build_cmd):
+def _process(caller, recipe):
     """
-    Tries to execute each command in the build list
+    This collects the build commands and adds them to the manifest. If there
+    are new table flags they will be reused on this node. Only when there are
+    no more flags will the manifest be run.  That means the manifest could
+    contain build commands from several tables.
+    """
+    next_table = ""
+    for line in recipe:
+        "check for @autobuild and remove it. There should be only one."
+        if "@autobuild" in line:
+            next_table = line.replace("@autobuild ", "")
+        else:
+            MANIFEST.append(line)
+    if next_table:
+        caller.ndb._menutree.table = next_table
+        return "menunode_start"
+    else:
+        _build_it(caller)
+
+
+def _build_it(caller):
+    """
+    Tries to execute each command in the global MANIFEST
     """
     caller.msg("Builder started")
-    for cmd in build_cmd:
+    caller.msg(MANIFEST)
+    for cmd in MANIFEST:
         caller.execute_cmd(cmd)
         caller.msg("executed %s" % cmd)
     caller.msg("Finished building")
-    # TODO try this next
     return menunode_end
-    # but I don't think it will really work
 
 
 def menunode_end(caller):
     "End of the menu"
     text = "Reached End Node"
-    return text, None
+    options = []
+    global MANIFEST
+    MANIFEST = []  # reset before shutting down
+    return text, options
 
 
 def menunode_table(caller, table_no):
@@ -121,6 +150,8 @@ class CmdAutoBuild(MuxCommand):
 
     """
     key = "@autobuild"
+    global MANIFEST
+    MANIFEST = []
 
     def func(self):
         '''
