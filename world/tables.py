@@ -520,13 +520,13 @@ GYGAX = {  # APPENDIX_A
             (See Table VII.), passage continues -- check again in
             30' (this table)""",
             ["@create/drop Trick",
-                "@autobuild I"]),
+                "@tun f"]),
         (20, 20, "Wandering Monster",
             """
             -- check again immeditately to see what lies ahead
             so direction of monster's approach can be determined.""",
             ["@create/drop Monster",
-                "@autobuild I"]),
+                "@tun f"]),
         ]],
     "II.a": ["LOCATION OF DOOR", 20, [  # build ready
         (1, 6, "Left", "<door is on left side of passage>",

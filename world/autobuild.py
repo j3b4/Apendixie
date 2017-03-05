@@ -22,10 +22,10 @@ def menunode_start(caller):
     print (dieroll, name, desc, build_cmd)
     # table is a string name of a known table
     # override is optional and sets a particular result
-    text = "You rolled a %s " % dieroll
+    text = "You rolled a %s on table %s " % (dieroll, table)
     text += "resulting in a %s" % name
     text += "\n %s" % desc
-    text += "\n Build recipe: "
+    text += "\n Build recipe:\n----------------\n"
     try:
         text += '\n'.join(build_cmd)
     except TypeError:
@@ -52,9 +52,9 @@ def menunode_start(caller):
 
 def _cancel_it(caller):
     text = "You tried to cancel and moved back"
-    caller.execute_cmd("say I say I say")
+    # caller.execute_cmd("move back")
     caller.msg(text)
-    # return menunode_end
+    return menunode_end
 
 
 def _build_it(caller, build_cmd):
@@ -67,7 +67,7 @@ def _build_it(caller, build_cmd):
         caller.msg("executed %s" % cmd)
     caller.msg("Finished building")
     # TODO try this next
-    # return menunode_end
+    return menunode_end
     # but I don't think it will really work
 
 
