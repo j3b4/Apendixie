@@ -2,6 +2,11 @@ Appendixie
 TODO Actions
 	[_] 66% Automagic:
 		[_] 33% Auto-build prompt
+			[_] % STATUS
+				: Almost working but two things to fix remain
+				[_] Secondary menus are not waiting for input
+				[_] Evmenu is not exiting gracefully through end node
+					[_] "q" built in command works
 			: When showing the suggested command, prompt the player to accept
 			: the suggestion, implementing it
 			: immediately

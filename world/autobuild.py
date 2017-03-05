@@ -6,15 +6,13 @@ from tables import GYGAX, rolltable, gettable
 # TODO: In future, Choose different tablesets, perhaps based on major zone
 # divisions.
 
-MANIFEST = []
+# MANIFEST = []
 # omg I feel unwell doing this!
 # perhaps should use caller.ndb._menutree.MANIFEST instead?
 
 
 def menunode_start(caller):
     print "\nmenunode_Started\n"
-    print "Manifest: "
-    print MANIFEST
     table = caller.ndb._menutree.table
     override = caller.ndb._menutree.override
     print "table = %s" % table
@@ -52,7 +50,7 @@ def menunode_start(caller):
                 "goto": "menunode_table_I"},
                {"key": ("C", "c"),
                 "desc": "Cancel and move back",
-                "exec": _cancel_it})
+                "goto": "menunode_end"})
     return text, options
 
 
@@ -71,39 +69,28 @@ def _process(caller, recipe):
     contain build commands from several tables.
     """
     next_table = ""
+    manifest = []
     for line in recipe:
         "check for @autobuild and remove it. There should be only one."
         if "@autobuild" in line:
             next_table = line.replace("@autobuild ", "")
         else:
-            MANIFEST.append(line)
+            manifest.append(line)
     if next_table:
         caller.ndb._menutree.table = next_table
         return "menunode_start"
     else:
-        _build_it(caller)
-
-
-def _build_it(caller):
-    """
-    Tries to execute each command in the global MANIFEST
-    """
-    caller.msg("Builder started")
-    caller.msg(MANIFEST)
-    for cmd in MANIFEST:
-        caller.execute_cmd(cmd)
-        caller.msg("executed %s" % cmd)
-    caller.msg("Finished building")
-    return menunode_end
+        "execute each command in manifest"
+        for cmd in manifest:
+            caller.execute_cmd(cmd)
+            caller.msg("\n----------\nexecuted %s\n-----------\n" % cmd)
+        return "menunode_end"
 
 
 def menunode_end(caller):
     "End of the menu"
-    text = "Reached End Node"
-    options = []
-    global MANIFEST
-    MANIFEST = []  # reset before shutting down
-    return text, options
+    text = "Successfully closed menu"
+    return text, None
 
 
 def menunode_table(caller, table_no):
