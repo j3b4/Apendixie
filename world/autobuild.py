@@ -6,17 +6,13 @@ from tables import GYGAX, rolltable, gettable
 # TODO: In future, Choose different tablesets, perhaps based on major zone
 # divisions.
 
-# MANIFEST = []
-# omg I feel unwell doing this!
-# perhaps should use caller.ndb._menutree.MANIFEST instead?
-
 
 def menunode_start(caller):
     print "\nmenunode_Started\n"
     table = caller.ndb._menutree.table
-    caller.ndb._menutree.table = None
+    caller.ndb._menutree.table = ""
     override = caller.ndb._menutree.override
-    caller.ndb._menutree.override = None
+    caller.ndb._menutree.override = ""
     print "table = %s" % table
     print "override= %s" % override
 
@@ -45,12 +41,13 @@ def menunode_start(caller):
 
     options = ({"key": ("A", "a"),
                 "desc": "Accept Destiny's Edict",
-                "goto": "menunode_end",
+                # "goto": "menunode_end",
                 "exec": _process(caller, recipe),
+                "goto": "menunode_end"
                 },
                {"key": ("F", "f"),
                 "desc": "Flout fickle Fortune",
-                "goto": "menunode_table_I"},
+                "goto": "menunode_manual"},
                {"key": ("C", "c"),
                 "desc": "Cancel and move back",
                 "goto": "menunode_end"})
@@ -77,7 +74,7 @@ def _process(caller, recipe):
         "check for @autobuild and remove it. There should be only one."
         if "@autobuild" in line:
             next_table = line.replace("@autobuild ", "")
-            print "FOUND @autobuild %s" % next_table
+            caller.msg("FOUND next table will be %s" % next_table)
         else:
             manifest.append(line)
 
@@ -88,9 +85,26 @@ def _process(caller, recipe):
 
     if next_table:
         caller.ndb._menutree.table = next_table
-        return "menunode_start"
+        caller.msg("\n\n Going to clean mode before rolling on %s" %
+                   next_table)
+        return "menunode_clean"
     # else:
     #   return "menunode_end"
+
+
+def menunode_clean(caller):
+    """
+    This should remove the cached user input
+    before restarting the menu.
+    """
+    text = "Cleaning up! Press enter to continue."
+    options = ({"desc": "Carry on!",
+                "key": "_default",
+                "goto": "menunode_start"})
+    '''
+    '''
+    # caller.msg("Passing through the clean cycle!")
+    return text, options
 
 
 def menunode_end(caller):
