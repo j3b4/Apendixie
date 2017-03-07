@@ -14,7 +14,9 @@ from tables import GYGAX, rolltable, gettable
 def menunode_start(caller):
     print "\nmenunode_Started\n"
     table = caller.ndb._menutree.table
+    caller.ndb._menutree.table = None
     override = caller.ndb._menutree.override
+    caller.ndb._menutree.override = None
     print "table = %s" % table
     print "override= %s" % override
 
@@ -43,6 +45,7 @@ def menunode_start(caller):
 
     options = ({"key": ("A", "a"),
                 "desc": "Accept Destiny's Edict",
+                "goto": "menunode_end",
                 "exec": _process(caller, recipe),
                 },
                {"key": ("F", "f"),
@@ -74,22 +77,26 @@ def _process(caller, recipe):
         "check for @autobuild and remove it. There should be only one."
         if "@autobuild" in line:
             next_table = line.replace("@autobuild ", "")
+            print "FOUND @autobuild %s" % next_table
         else:
             manifest.append(line)
+
+    "execute each command in manifest"
+    for cmd in manifest:
+        caller.execute_cmd(cmd)
+        caller.msg("\n----------\nexecuted %s\n-----------\n" % cmd)
+
     if next_table:
         caller.ndb._menutree.table = next_table
         return "menunode_start"
-    else:
-        "execute each command in manifest"
-        for cmd in manifest:
-            caller.execute_cmd(cmd)
-            caller.msg("\n----------\nexecuted %s\n-----------\n" % cmd)
-        return "menunode_end"
+    # else:
+    #   return "menunode_end"
 
 
 def menunode_end(caller):
     "End of the menu"
     text = "Successfully closed menu"
+    # caller.ndb._menutree.table = None
     return text, None
 
 
@@ -137,8 +144,6 @@ class CmdAutoBuild(MuxCommand):
 
     """
     key = "@autobuild"
-    global MANIFEST
-    MANIFEST = []
 
     def func(self):
         '''
