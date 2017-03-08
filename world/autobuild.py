@@ -1,8 +1,9 @@
 "Builder Menu"
-from collections import OrderedDict
+# from collections import OrderedDict
 from evennia.utils.evmenu import EvMenu
 from commands.command import MuxCommand
-from tables import GYGAX, rolltable, gettable
+from tables import GYGAX, rolltable
+# from tables import GYGAX, rolltable, gettable
 # TODO: In future, Choose different tablesets, perhaps based on major zone
 # divisions.
 
@@ -21,6 +22,7 @@ def menunode_start(caller):
     name = results[1]
     desc = results[2] or None
     recipe = results[3] or None
+    caller.ndb._menutree.recipe = recipe
     print (dieroll, name, desc, recipe)
     # table is a string name of a known table
     # override is optional and sets a particular result
@@ -28,22 +30,23 @@ def menunode_start(caller):
     text += "resulting in a %s" % name
     text += "\n %s" % desc
     text += "\n Build recipe:\n----------------\n"
+    report = ""
     try:
         text += '\n'.join(recipe)
     except TypeError:
         report = "Type error in recipe"
         print report
-        caller.msg(report)
     except:
         report = "Do you even have a recipe"
         print report
-        caller.msg(report)
+
+    caller.msg(report)
 
     options = ({"key": ("A", "a"),
                 "desc": "Accept Destiny's Edict",
-                # "goto": "menunode_end",
-                "exec": _process(caller, recipe),
-                "goto": "menunode_end"
+                "goto": "menunode_process",
+                # "exec": _process(caller, recipe),
+                # "goto": "menunode_end"
                 },
                {"key": ("F", "f"),
                 "desc": "Flout fickle Fortune",
@@ -53,43 +56,53 @@ def menunode_start(caller):
                 "goto": "menunode_end"})
     return text, options
 
-
+'''
 def _cancel_it(caller):
     text = "You tried to cancel and moved back"
     # caller.execute_cmd("move back")
     caller.msg(text)
     return menunode_end
+'''
 
 
-def _process(caller, recipe):
+def menunode_process(caller):
     """
     This collects the build commands and adds them to the manifest. If there
     are new table flags they will be reused on this node. Only when there are
     no more flags will the manifest be run.  That means the manifest could
     contain build commands from several tables.
     """
+    recipe = caller.ndb._menutree.recipe
     next_table = ""
+    next_node = "menunode_end"
+    text = ""
     manifest = []
     for line in recipe:
         "check for @autobuild and remove it. There should be only one."
         if "@autobuild" in line:
             next_table = line.replace("@autobuild ", "")
-            caller.msg("FOUND next table will be %s" % next_table)
+            text += "Next table: %s" % next_table
         else:
+            # caller.msg("appending line: %s" % line)
             manifest.append(line)
 
     "execute each command in manifest"
     for cmd in manifest:
         caller.execute_cmd(cmd)
-        caller.msg("\n----------\nexecuted %s\n-----------\n" % cmd)
+        caller.msg("executed %s" % cmd)
 
     if next_table:
         caller.ndb._menutree.table = next_table
-        caller.msg("\n\n Going to clean mode before rolling on %s" %
-                   next_table)
-        return "menunode_clean"
-    # else:
-    #   return "menunode_end"
+        next_node = "menunode_start"
+
+    text += "\n\n Press enter continue"
+
+    options = {"key": "_default",
+               "goto": next_node}
+
+    return text, options
+
+'''
 
 
 def menunode_clean(caller):
@@ -101,10 +114,10 @@ def menunode_clean(caller):
     options = ({"desc": "Carry on!",
                 "key": "_default",
                 "goto": "menunode_start"})
-    '''
-    '''
     # caller.msg("Passing through the clean cycle!")
     return text, options
+
+'''
 
 
 def menunode_end(caller):
@@ -112,11 +125,11 @@ def menunode_end(caller):
     text = "Successfully closed menu"
     # caller.ndb._menutree.table = None
     return text, None
-
+'''
 
 def menunode_table(caller, table_no):
-    """ Display all table entries in a menu, allowing player to choose any one by
-    number."""
+    """ Display all table entries in a menu, allowing player to choose any one
+    by number."""
     table = gettable(GYGAX, table_no)
     # TODO make this work for all tables
     # title, die, list
@@ -144,6 +157,8 @@ def menunode_table(caller, table_no):
         text = "A menu of all options on Table %s: %s" % (table_no, title)
 
     return text, options
+
+'''
 
 
 class CmdAutoBuild(MuxCommand):
