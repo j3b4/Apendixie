@@ -1,12 +1,12 @@
 Appendixie
 TODO Actions
-	[_] 66% Automagic:
-		[_] 33% Auto-build prompt
-			[_] % STATUS
+	[_] 75% Automagic:
+		[_] 50% Auto-build prompt
+			[X] 100% STATUS
 				: Almost working but two things to fix remain
-				[_] Secondary menus are not waiting for input
-				[_] Evmenu is not exiting gracefully through end node
-					[_] "q" built in command works
+				[X] Secondary menus are not waiting for input
+				[X] Evmenu is not exiting gracefully through end node
+					[X] "q" built in command works
 			: When showing the suggested command, prompt the player to accept
 			: the suggestion, implementing it
 			: immediately
@@ -17,18 +17,18 @@ TODO Actions
 			[_] 0% On enter 'unfinished passage'
 				[_] roll table - display result
 				[_] menu - accept or over ride
-					[_] [s] submit to fates edict
-						[_] caller.execute_cmd(@tun or @create)
+					[X] [s] submit to fates edict
+						[X] caller.execute_cmd(@tun or @create)
 							: this is partly working
 							: requires a lot of logic.
 					[_] [f] flout fickle fortune (at your peril) 
 						[_] open menu
 						so far okay in principle
-					[_] Try using batch comman
-						: So in each table at each final result... an optional
-						: command column that gets processed by @batchcommand
-						have @batchcommand treat single objects as a .ev file
-					[_] Figure out how to navigate the table tree
+					[X] Try using batch comman
+						: Actually just a list of commands seems to work fine.
+						: For now. In the future, more complex builds might
+						: require more logic.
+					[X] Figure out how to navigate the table tree
 						: where is the logic stored?
 						: yet another optinonal column in the table?
 						YES
