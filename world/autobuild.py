@@ -44,28 +44,28 @@ def menunode_start(caller):
 
     options = ({"key": ("A", "a"),
                 "desc": "Accept Destiny's Edict",
-                "goto": "menunode_process",
-                # "exec": _process(caller, recipe),
-                # "goto": "menunode_end"
+                # "goto": "menunode_process",
+                "exec": _process,
+                "goto": "menunode_end"
                 },
                {"key": ("F", "f"),
                 "desc": "Flout fickle Fortune",
                 "goto": "menunode_manual"},
                {"key": ("C", "c"),
                 "desc": "Cancel and move back",
-                "goto": "menunode_end"})
+                "goto": "menunode_end",
+                "exec": _cancel_it})
     return text, options
 
-'''
+
 def _cancel_it(caller):
     text = "You tried to cancel and moved back"
     # caller.execute_cmd("move back")
     caller.msg(text)
     return menunode_end
-'''
 
 
-def menunode_process(caller):
+def _process(caller):
     """
     This collects the build commands and adds them to the manifest. If there
     are new table flags they will be reused on this node. Only when there are
@@ -95,12 +95,7 @@ def menunode_process(caller):
         caller.ndb._menutree.table = next_table
         next_node = "menunode_start"
 
-    text += "\n\n Press enter continue"
-
-    options = {"key": "_default",
-               "goto": next_node}
-
-    return text, options
+    return next_node
 
 '''
 
