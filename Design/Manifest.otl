@@ -119,6 +119,10 @@ TODO Actions
 			at character creation db.journal = ()
 			commands go in the character typeclass
 Feature Requests:
+	Build a desc append command switch?
+	New Tables
+		Monsters
+		Descriptions
 	Zones
 		: Use tags to create dungeon zones.  Presently, Player made dungeons
 		: chould have their own name.
