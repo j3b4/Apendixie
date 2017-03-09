@@ -491,11 +491,9 @@ GYGAX = {  # APPENDIX_A
         (3, 5, "Door",
             """
             (see Table II.) <roll on Table II.a first, then II.b>""",
-            ["@autobuild II.a"]),  # build list
+            ["@name here = By a door.", "@autobuild II.a"]),  # build list
         (6, 10, "Side Passage",
-            """
-            (see Table III.) -- check again in 30'
-            (this table)""",
+            """(see Table III.) -- check again in 30'(this table)""",
             ["@autobuild III"]),
         (11, 13, "Passage Turns",
             """
@@ -536,7 +534,7 @@ GYGAX = {  # APPENDIX_A
             ["@door r",
                 "@tunnel f"]),
         (13, 20, "Ahead", "<passage comed to an end at this door>",
-            ["@door f"]),
+            ["@name here = End of passage, at a door", "@door f"]),
         ]],
     "II.b": ["SPACE BEYOND DOOR", 20, [  # TODO
         (1, 4, "Parallel passage**",
@@ -557,26 +555,35 @@ GYGAX = {  # APPENDIX_A
         ]],
     "III": ["SIDE PASSAGES", 20, [  # build ready
         (1, 2, "Side Passage", "left 90 degrees",
-            ["@tunnel f", "@tunnel l = dif passage"],),
+            ["@name here = T junction",
+             "@tunnel f",
+             "@tunnel l = dif passage"],),
         (3, 4, "Side Passage", "right 90 degrees",
-            ["@tunnel f", "@tunnel r = dif passage"],),
+            ["@name here = T junction",
+             "@tunnel f", "@tunnel r = dif passage"],),
         (5, 5, "Side Passage", "left 45 degrees ahead",
-            ["@tunnel f", "@tunnel fl = dif passage"],),
+            ["@name here = Split passage",
+             "@tunnel f", "@tunnel fl = dif passage"],),
         (6, 6, "Side Passage", "right 45 degrees ahead",
-            ["@tunnel f", "@tunnel fr = dif passage"],),
+            ["@name here = Split passage",
+             "@tunnel f", "@tunnel fr = dif passage"],),
         (7, 7, "Side Passage", "left 45 degrees behind (left 135 degrees)",
-            ["@tunnel f", "@tunnel bl = dif passage"],),
+            ["@name here = Split passage",
+             "@tunnel f", "@tunnel bl = dif passage"],),
         (8, 8, "Side Passage", "right 45 degrees behind (right 135 degrees)",
-            ["@tunnel f", "@tunnel br = dif passage"],),
+            ["@name here = Split passage",
+             "@tunnel f", "@tunnel br = dif passage"],),
         (9, 9, "Curving Side Passage", "left curve 45 degrees ahead",
-            ["@tunnel f", "@tunnel fl = dif passage"],),
+            ["@name here = Split passage",
+             "@tunnel f", "@tunnel fl = dif passage"],),
         (10, 10, "Curving Side Passage", "right curve 45 degrees ahead",
-            ["@tunnel f", "@tunnel fr = dif passage"],),
+            ["@name here = Split passage",
+             "@tunnel f", "@tunnel fr = dif passage"],),
         (11, 13, "Junction", "passage 'T's",
             ["@tunnel l = dif passage", "@tunnel r = dif passage",
                 "@name here = T intersection"],),
         (14, 15, "Junction", "passage 'Y's",
-            ["@tunnel f", "@tunnel fl", "@tunnel fr",
+            ["@tunnel fl", "@tunnel fr",
                 "@name here = Y Intersection"],),
         (16, 19, "Junction", "four-way intersection",
             ["@tunnel f", "@tunnel l", "@tunnel r",
@@ -624,7 +631,7 @@ GYGAX = {  # APPENDIX_A
             ["@tunnel bl",
                 "@name here = Hairpin Turn"]),
         (11, 18, "right 90 degrees", "turn",
-            ["@tunnel l",
+            ["@tunnel r",
                 "@name here = Sharp Turn"]),
         (19, 19, "right 45 degrees ahead", "turn",
             ["@tunnel r",
@@ -641,22 +648,22 @@ GYGAX = {  # APPENDIX_A
             ["@name here = 20x20 Chamber",
                 "@autobuild V.C"]),
         (5, 6, "Square, 30' x 30'", "description",
-            ["@name here = 20x20 Chamber",
+            ["@name here = 30x30 Chamber",
                 "@autobuild V.C"]),
         (7, 8, "Square, 40' x 40'", "description",
-            ["@name here = 20x20 Chamber",
+            ["@name here = 40x40 Chamber",
                 "@autobuild V.C"]),
         (9, 10, "Rectangular, 20' x 30'", "description",
-            ["@name here = 20x20 Chamber",
+            ["@name here = 20x30 Chamber",
                 "@autobuild V.C"]),
         (11, 13, "Rectangular, 20' x 30'", "description",
-            ["@name here = 20x20 Chamber",
+            ["@name here = 20x30 Chamber",
                 "@autobuild V.C"]),
         (14, 15, "Rectangular, 30' x 50'", "description",
-            ["@name here = 20x20 Chamber",
+            ["@name here = 30x50 Chamber",
                 "@autobuild V.C"]),
         (16, 17, "Rectangular, 40' x 60'", "description",
-            ["@name here = 20x20 Chamber",
+            ["@name here = 40x60 Chamber",
                 "@autobuild V.C"]),
         (18, 20, "Unusual shape and size",
             """
@@ -707,19 +714,25 @@ GYGAX = {  # APPENDIX_A
             ["@autobuild VIII"])
         ]],
     "V.B": ["UNUSUAL SIZE", 20, [
-        (1, 3, "about 500 sq. ft."),
-        (4, 6, "about 900 sq. ft."),
-        (7, 8, "about 1,300 sq. ft."),
-        (9, 10, "about 2,000 sq. ft."),
-        (11, 12, "about 2,700 sq. ft."),
-        (13, 14, "about 3,400 sq. ft."),
+        (1, 3, "about 500 sq. ft.", "",
+            ["@desc This room is about 500 sq. feet"]),
+        (4, 6, "about 900 sq. ft.", "",
+            ["@desc This room is about 900 sq. feet"]),
+        (7, 8, "about 1,300 sq. ft.", "",
+            ["@desc This room is about 1,300 sq. feet"]),
+        (9, 10, "about 2,000 sq. ft.", "",
+            ["@desc This room is about 2,000 sq. feet"]),
+        (11, 12, "about 2,700 sq. ft.", "",
+            ["@desc This room is about 2,700 sq. feet"]),
+        (13, 14, "about 3,400 sq. ft.", "",
+            ["@desc This room is about 3,400 sq. feet"]),
         (15, 20, "Roll again",
             """
             add the result to <2,000 sq. ft.> (if this generates another 15-20
-            repeat the process, <adding another 2,000 sq. ft.>, and so on)"""),
+            repeat the process, <adding another 2,000 sq. ft.>, and so on)"""
+            ["@desc This massive room is about 6000 sq. feet"])
         ]],
     "V.C": ["NUMBER <<and type>> OF EXITS", 20, [
-        # Appendix A, TABLE V.C too tedious. This is a simplified version.
         (1, 1, "1 Door", "placement ahead", ["@door f"]),
         (2, 2, "1 Door", "placement right", ["@door f"]),
         (3, 3, "1 Door", "placement left", ["@door f"]),
@@ -749,13 +762,13 @@ GYGAX = {  # APPENDIX_A
             ["@desc here = There are no obvious exits besides the one you"
                 "entered from"]),
         ]],
-    "V.D": ["EXIT LOCATION", 20, [
+    "V.D": ["EXIT LOCATION", 20, [  # hold/deprecate
         (1, 7, "opposite wall"),
         (8, 12, "left wall"),
         (13, 17, "right wall"),
         (18, 20, "same wall")
         ]],
-    "V.E": ["EXIT DIRECTION <<for passages only>>", 10, [
+    "V.E": ["EXIT DIRECTION <<for passages only>>", 10, [  # hold/deprecate
         # sneaking a d10 in here for lulz
         (1, 8, "straight ahead"),
         (9, 9, "45 degrees left/right*",
@@ -766,16 +779,19 @@ GYGAX = {  # APPENDIX_A
             use the direction before the slash in preference to the other."""),
         ]],
     "V.F": ["CHAMBER OR ROOM CONTENTS", 20, [
-        (1, 12, "Empty"),
+        (1, 12, "Empty", "Nothing here, no new commnads."),
         (13, 14, "Monster only",
             """
             (determine on appropriate table from APPENDIX C: RANDOM MONSTER
-            ENCOUNTERS, Dungeon Encounter Matrix)."""),
+            ENCOUNTERS, Dungeon Encounter Matrix).""",
+            ["@create/drop Monster"]),
         (15, 17, "Monster and treasure",
             """
             Monster - see APPENDIX C: RANDOM MONSTER ENCOUNTERS, Dungeon
             Encounter Matrix.
-            Treasure - see TABLE V.G <<Roll twice>>"""),
+            Treasure - see TABLE V.G <<Roll twice>>""",
+            ["@create/drop Monster",
+                "@create/drop Treasture"]),
         (18, 18, "Special/Stairs",
             """<< Roll on TABLE V.F.i STAIRS>>"""),
         (19, 19, "Trick/Trap",
