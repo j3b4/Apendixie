@@ -1,7 +1,7 @@
 Appendixie
 TODO Actions
-	[_] 75% Automagic:
-		[_] 50% Auto-build prompt
+	[_] 87% Automagic:
+		[_] 75% Auto-build prompt
 			[X] 100% STATUS
 				: Almost working but two things to fix remain
 				[X] Secondary menus are not waiting for input
@@ -10,10 +10,14 @@ TODO Actions
 			: When showing the suggested command, prompt the player to accept
 			: the suggestion, implementing it
 			: immediately
-			[_] 0% idea: try tweak autobuild command
-				[_] to take args
+			[X] 100% idea: try tweak autobuild command
+				[X] to take args
 					[X] to start on particular table
-					[_] and over ride result if nec
+					[X] and over ride result if nec
+			Flout forture: allow user to over ride a result 
+				produce a menu
+					: problem is how to build the options so that the menu
+					: responds to the actual choice. Review shop example
 			[_] 0% On enter 'unfinished passage'
 				[_] roll table - display result
 				[_] menu - accept or over ride
