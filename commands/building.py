@@ -235,4 +235,75 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
             new_to_exit.db.return_exit = new_back_exit
             new_back_exit.db.return_exit = new_to_exit
 
+
+class CmdDesc(COMMAND_DEFAULT_CLASS):
+    """
+    describe an object
+
+    Usage:
+      @desc [<obj> =] <description>
+
+    Switches:
+      edit - Open up a line editor for more advanced editing.
+      append - Adds new text to original description
+
+    Sets the "desc" attribute on an object. If an object is not given,
+    describe the current room.
+    """
+    key = "@desc"
+    aliases = "@describe"
+    locks = "cmd:perm(desc) or perm(Builders)"
+    help_category = "Building"
+
+    def edit_handler(self):
+        if self.rhs:
+            self.msg("|rYou may specify a value, or use the edit switch, "
+                     "but not both.|n")
+            return
+        if self.args:
+            obj = self.caller.search(self.args)
+        else:
+            obj = self.caller.location or self.msg(
+                "|rYou can't describe oblivion.|n")
+        if not obj:
+            return
+
+        self.caller.db.evmenu_target = obj
+        # launch the editor
+        EvEditor(self.caller, loadfunc=_desc_load, savefunc=_desc_save,
+                 quitfunc=_desc_quit, key="desc", persistent=True)
+        return
+
+    def func(self):
+        "Define command"
+
+        caller = self.caller
+        if not self.args and 'edit' not in self.switches:
+            caller.msg("Usage: @desc [<obj> =] <description>")
+            return
+
+        if 'edit' in self.switches:
+            self.edit_handler()
+            return
+
+        if self.rhs:
+            # We have an =
+            obj = caller.search(self.lhs)
+            if not obj:
+                return
+            desc = self.rhs
+        else:
+            obj = caller.location or self.msg(
+                    "|rYou can't describe oblivion.|n")
+            if not obj:
+                return
+            if "append" in self.switches:
+                desc = obj.db.desc or ""
+                desc += self.args
+            else:
+                desc = self.args
+
+        obj.db.desc = desc
+        caller.msg("The description was set on %s." % obj.get_display_name(caller))
+
 # last line

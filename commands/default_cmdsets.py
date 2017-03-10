@@ -18,7 +18,7 @@ from evennia import default_cmds
 from evennia.contrib.dice import CmdDice
 from typeclasses.doors import CmdOpen, CmdOpenCloseDoor
 from tables import CmdTable
-from building import CmdTunnel
+from building import CmdTunnel, CmdDesc
 from journal import CmdUpdateJournal, CmdReadJournal
 from movement import CmdMove
 from world.autobuild import CmdAutoBuild
@@ -50,6 +50,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(CmdMove())
         self.add(CmdBuildShop())
         self.add(CmdAutoBuild())
+        self.add(CmdDesc())
 
 
 class PlayerCmdSet(default_cmds.PlayerCmdSet):
