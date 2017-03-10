@@ -43,6 +43,10 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
       oneway - do not create an exit back to the current location
       door - Creates a Simple Door exit
       room - forces a real 10x10 room on the other side of the door
+      diff - Creates a new style passage (triggers role on passage
+             size table  - Table III.A)
+      loud - Reports the construction of destination room, to and from exits to
+             the caller
 
     Example:
       @tunnel n
@@ -79,7 +83,6 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
                   "sw": ("southwest", "ne"),
                   "w": ("west", "e"),
                   "nw": ("northwest", "se"),
-                  # Don't want to use @tun for level changes etc.
                   }
     relative = ["f", "fr", "r", "br", "b", "bl", "l", "fl"]
 
@@ -109,7 +112,7 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
         if self.lhs in self.relative:
             message = "relative direction processing"
             print message
-            caller.msg(message)
+            # caller.msg(message)
             if not self.caller.db.direction:
                 caller.msg("You have no fixed direction")
                 return
@@ -177,6 +180,8 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
             new_room.tags.add("inpasage")
         if "room" in self.switches:
             new_room.tags.add("room10")
+        if "diff" in self.switches:
+            new_room.tags.add("diff")
 
         # report to builder
         room_string = "Created room %s(%s)" % (new_room, new_room.dbref)
@@ -220,7 +225,9 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
                                                    new_back_exit,
                                                    new_back_exit.dbref,
                                                    alias_string)
-        caller.msg("%s%s%s" % (room_string, exit_to_string, exit_back_string))
+        if "loud" in self.switches:
+            caller.msg("%s%s%s" % (room_string, exit_to_string,
+                                   exit_back_string))
 
         # if inherits_from(new_exit, SimpleDoor):
         if "door" in self.switches:

@@ -42,6 +42,8 @@ class SimpleDoor(DefaultExit):
 
         """
         self.db.return_exit = None
+        self.locks.add("traverse:false()")
+        # should create doors closed by default
 
     def setlock(self, lockstring):
         """

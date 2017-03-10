@@ -75,13 +75,13 @@ def _process(caller):
     recipe = caller.ndb._menutree.recipe
     next_table = ""
     next_node = "menunode_end"
-    text = ""
+    # text = ""
     manifest = []
     for line in recipe:
         "check for @autobuild and remove it. There should be only one."
         if "@autobuild" in line:
             next_table = line.replace("@autobuild ", "")
-            text += "Next table: %s" % next_table
+            # text += "Next table: %s" % next_table
         else:
             # caller.msg("appending line: %s" % line)
             manifest.append(line)
