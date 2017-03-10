@@ -2,8 +2,8 @@
 # from collections import OrderedDict
 from evennia.utils.evmenu import EvMenu
 from commands.command import MuxCommand
-from tables import GYGAX, rolltable
-# from tables import GYGAX, rolltable, gettable
+# from tables import GYGAX, rolltable
+from tables import GYGAX, rolltable, gettable
 # TODO: In future, Choose different tablesets, perhaps based on major zone
 # divisions.
 
@@ -11,7 +11,6 @@ from tables import GYGAX, rolltable
 def menunode_start(caller):
     print "\nmenunode_Started\n"
     table = caller.ndb._menutree.table
-    caller.ndb._menutree.table = ""
     override = caller.ndb._menutree.override
     caller.ndb._menutree.override = ""
     print "table = %s" % table
@@ -49,7 +48,7 @@ def menunode_start(caller):
                 "goto": "menunode_end"
                 },
                {"key": ("F", "f"),
-                "desc": "Flout fickle Fortune",
+                "desc": "Flout Fortune, and choose your own adventure",
                 "goto": "menunode_manual"},
                {"key": ("C", "c"),
                 "desc": "Cancel and move back",
@@ -94,25 +93,10 @@ def _process(caller):
     if next_table:
         caller.ndb._menutree.table = next_table
         next_node = "menunode_start"
+    else:
+        caller.ndb._menutree.table = ""
 
     return next_node
-
-'''
-
-
-def menunode_clean(caller):
-    """
-    This should remove the cached user input
-    before restarting the menu.
-    """
-    text = "Cleaning up! Press enter to continue."
-    options = ({"desc": "Carry on!",
-                "key": "_default",
-                "goto": "menunode_start"})
-    # caller.msg("Passing through the clean cycle!")
-    return text, options
-
-'''
 
 
 def menunode_end(caller):
@@ -120,12 +104,16 @@ def menunode_end(caller):
     text = "Successfully closed menu"
     # caller.ndb._menutree.table = None
     return text, None
-'''
 
-def menunode_table(caller, table_no):
+
+def menunode_manual(caller):
     """ Display all table entries in a menu, allowing player to choose any one
     by number."""
+    table_no = caller.ndb._menutree.table
+    caller.msg("table_no: %s" % table_no)
     table = gettable(GYGAX, table_no)
+    title = table[0]
+    caller.msg("table name: %s" % title)
     # TODO make this work for all tables
     # title, die, list
     # list = name, desc, build
@@ -138,22 +126,20 @@ def menunode_table(caller, table_no):
     # so, the menu needs the name, desc, and build list for every item in the
     # table.
     #
-    # options: name, desc, exec, goto
-    menu = OrderedDict(table[2])
-    title = table[0]
-    options = ()
+    # options: number, desc, exec, goto
+    menu = table[2]
+    # menu = OrderedDict(table[2])
+    options = []
     for i in menu:
         name = i[2]
-        desc = i[3]
-        build = i[4]
-        options.append({"name": name,
-                        "desc": desc,
-                        "build": build})
-        text = "A menu of all options on Table %s: %s" % (table_no, title)
+        recipe = i[4]
+        options.append(
+                {"desc": name,
+                 "exec": lambda caller: caller.ndb._menutree.recipe=recipe,
+                 "goto": _process})
+    text = "A menu of all options on Table %s: %s" % (table_no, title)
 
     return text, options
-
-'''
 
 
 class CmdAutoBuild(MuxCommand):
