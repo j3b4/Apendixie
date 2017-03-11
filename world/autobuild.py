@@ -10,7 +10,7 @@ from tables import GYGAX, rolltable, gettable
 
 def menunode_start(caller):
     print "\nmenunode_Started\n"
-    table = caller.ndb._menutree.table
+    table = str(caller.ndb._menutree.table)
     override = caller.ndb._menutree.override
     caller.ndb._menutree.override = ""
     print "table = %s" % table
@@ -64,7 +64,7 @@ def _cancel_it(caller):
     return menunode_end
 
 
-def _process(caller):
+def _process(caller, raw_input):
     """
     This collects the build commands and adds them to the manifest. If there
     are new table flags they will be reused on this node. Only when there are
@@ -106,7 +106,7 @@ def menunode_end(caller):
     return text, None
 
 
-def menunode_manual(caller):
+def menunode_manual(caller, raw_input):
     """ Display all table entries in a menu, allowing player to choose any one
     by number."""
     table_no = caller.ndb._menutree.table
@@ -128,18 +128,28 @@ def menunode_manual(caller):
     #
     # options: number, desc, exec, goto
     menu = table[2]
-    # menu = OrderedDict(table[2])
     options = []
     for i in menu:
+        dice_override = str(i[0])
         name = i[2]
-        recipe = i[4]
+        # recipe = i[4]
         options.append(
-                {"desc": name,
-                 "exec": lambda caller: caller.ndb._menutree.recipe=recipe,
-                 "goto": _process})
+            {"key": str(dice_override),
+             "desc": name,
+             "goto": "menunode_end",
+             "exec": _manual_process
+             })
     text = "A menu of all options on Table %s: %s" % (table_no, title)
 
     return text, options
+
+
+def _manual_process(caller, raw_input):
+    # caller.ndb._menutree.table = dice_override
+    caller.ndb._menutree.override = int(raw_input)
+    caller.msg("next command %s = %s " % (caller.ndb._menutree.table,
+                                          caller.ndb._menutree.override))
+    return "menunode_start"
 
 
 class CmdAutoBuild(MuxCommand):

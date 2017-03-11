@@ -696,33 +696,33 @@ GYGAX = {  # APPENDIX_A
             See subtables: V.A and V.B"""),
         ]],
     "V.A": ["UNUSUAL SHAPE", 20, [
-        (1, 5, "Circular*",
+        (1, 5, "Circular*", ""
             """
             * 1-5 has pool (See Table VIII.A and  VIII.C if appropriate),
             6-7 has well, 8-10 has shaft, and 11-20 is normal.""",
             ["@name here = Circular Room",
                 "@autobuild V.B"]),
-        (6, 8, "Triangular",
+        (6, 8, "Triangular", ""
             ["@name here = Triangular Room",
                 "@autobuild V.B"]),
-        (9, 11, "Trapezoidal",
+        (9, 11, "Trapezoidal", ""
             ["@name here = Trapezoidal Room",
                 "@autobuild V.B"]),
-        (12, 13, "Odd-Shaped**",
+        (12, 13, "Odd-Shaped**", ""
             """
             ** Draw what shape you desire or what will fit the map -- it is a
             special shape if desired. <<Describe the shape>>""",
             ["@name here = Odd Shaped Room"]),
-        (14, 15, "Oval",
+        (14, 15, "Oval", ""
             ["@name here = Oval Room",
                 "@autobuild V.B"]),
-        (16, 17, "Hexagonal",
+        (16, 17, "Hexagonal", ""
             ["@name here = Hexagonal Room",
                 "@autobuild V.B"]),
-        (18, 19, "Octagonal",
+        (18, 19, "Octagonal", ""
             ["@name here = Octoganal Room",
                 "@autobuild V.B"]),
-        (20, 20, "Cave", "Cave type room",
+        (20, 20, "Cave", "Cave type room", ""
             ["@autobuild VIII"])
         ]],
     "V.B": ["UNUSUAL SIZE", 20, [

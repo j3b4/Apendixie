@@ -26,8 +26,9 @@ TODO Actions
 							: this is partly working
 							: requires a lot of logic.
 					[_] [f] flout fickle fortune (at your peril) 
-						[_] open menu
-						so far okay in principle
+						[X] open menu
+							so far okay in principle
+						[_] Fill out all tables and test all tables!
 					[X] Try using batch comman
 						: Actually just a list of commands seems to work fine.
 						: For now. In the future, more complex builds might
