@@ -11,6 +11,7 @@ from textwrap import dedent
 
 # TODO: add in builder commands to the table results, replacing the hints.
 
+'''
 xTABLE = [  # APPENDIX_A  # used by old "table" command deprecated
     ["Numeral", "Table Name", ],
     ["I", "PERIODIC CHECK", 20, [
@@ -481,6 +482,7 @@ xTABLE = [  # APPENDIX_A  # used by old "table" command deprecated
              1 level down; 17-20, 100 miles away for outdoor adventure.""")
         ]]
 ]  # END OF THE TABLE OF TABLES AKA APPENDIX A
+'''
 
 GYGAX = {  # APPENDIX_A
     "I": ["PERIODIC CHECK", 20, [  # build ready
